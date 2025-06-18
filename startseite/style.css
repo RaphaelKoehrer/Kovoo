@@ -143,7 +143,7 @@ body {
 }
 
 #nav img {
-    width: 180px;
+    width: 100px;
     height: auto;
 }
 
@@ -159,6 +159,12 @@ body {
     font-weight: 200;
     color: var(--color-text);
     text-align: center;
+}
+
+#welcomeText img {
+  position: relative;
+  top: 33px;
+  width: 250px;
 }
 
 #mainText hr {
