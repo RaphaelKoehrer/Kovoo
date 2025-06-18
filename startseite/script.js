@@ -74,4 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
             navHamburger.classList.remove('active');
         }
     });
+    const navIcon = document.getElementById('navIcon');
+
+    navIcon.addEventListener('click', () => {
+            location.href = '../startseite/index.html';
+
+    });
+    
 });

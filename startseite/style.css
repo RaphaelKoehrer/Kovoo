@@ -53,6 +53,10 @@ body {
     padding-top: 0;
 }
 
+#navIcon {
+  cursor: pointer;
+}
+
 .nav-item {
     flex: 0 0 auto;
     padding: 0 16px;
@@ -114,7 +118,7 @@ body {
 }
 
 #nav img {
-    width: 120px;
+    width: 180px;
     height: auto;
 }
 
