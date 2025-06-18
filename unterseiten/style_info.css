@@ -1,0 +1,85 @@
+/* Fonts importieren wie in style.css */
+@font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 200;
+    src: url('../startseite/fileadmin/fonts/montserrat-v29-latin-200.woff2') format('woff2');
+}
+@font-face {
+    font-display: swap;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../startseite/fileadmin/fonts/montserrat-v29-latin-regular.woff2') format('woff2');
+}
+@font-face {
+    font-display: swap;
+    font-family: 'Playfair';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../startseite/fileadmin/fonts/playfair-v9-latin-700.woff2') format('woff2');
+}
+
+#aboutWrapper {
+    margin: 2.5rem 0;
+    max-width: 680px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    padding: 2rem 1.5rem 2.2rem 1.5rem;
+    width: 100%;
+    text-align: left;
+    border: 1px solid #ececec;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 200;
+    line-height: 1.65;
+}
+
+#aboutWrapper h2 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 0.01em;
+    margin-top: 1.7rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+}
+
+#aboutWrapper h2:first-child {
+    margin-top: 0;
+}
+
+#aboutWrapper p,
+#aboutWrapper ul {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 200;
+    font-size: 1.05rem;
+    color: #232323;
+    margin-bottom: 1.1rem;
+}
+
+#aboutWrapper ul {
+    margin: 0.5em 0 0.5em 1.5em;
+    padding: 0;
+}
+
+#aboutWrapper strong {
+    font-weight: 400;
+    color: #1a1a1a;
+}
+
+@media (max-width: 900px) {
+    #aboutWrapper {
+        max-width: 96vw;
+        padding: 1.1rem 0.5rem 1.3rem 0.5rem;
+    }
+    #aboutWrapper h2 {
+        font-size: 1.25rem;
+    }
+    #aboutWrapper p,
+    #aboutWrapper ul {
+        font-size: 0.98rem;
+    }
+}
+
+/* ...existing code for other wrappers if needed... */

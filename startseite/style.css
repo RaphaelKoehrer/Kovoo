@@ -441,12 +441,6 @@ body {
     opacity: 1;
     transform: translateY(0);
 }
-@media (max-width: 1000px) {
-    .service-box, .bundle-box {
-        max-width: 98vw;
-        padding: 1.2rem 0.5rem;
-    }
-}
 
 /* Cookie Popup Styles */
 .cookie-popup {
@@ -549,3 +543,5 @@ body {
         width: 22px;
     }
 }
+
+
