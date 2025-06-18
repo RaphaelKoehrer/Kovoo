@@ -82,4 +82,30 @@
     }
 }
 
-/* ...existing code for other wrappers if needed... */
+body {
+    margin: 0;
+}
+
+#header {
+    width: 100%;
+    height: 15dvh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 3002;
+    position: fixed;
+    top: 0;
+    margin-top: 0;
+    padding-top: 0;
+    background: rgba(240, 240, 240, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+#nav {
+    margin-top: 0;
+    padding-top: 0;
+}
