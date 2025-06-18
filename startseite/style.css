@@ -20,6 +20,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+    z-index: 3002;
 }
 
 #header hr {
@@ -49,8 +51,8 @@ body {
 }
 
 .nav-hamburger {
-    background: none;
-    border: none;
+  border: none;
+    background: transparent;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -59,11 +61,15 @@ body {
     width: 40px;
     padding: 0;
     gap: 6px;
-    z-index: 3001; /* höher als nav-dropdown */
+    z-index: 5000; /* deutlich höher als nav-dropdown */
     margin-right: auto;
     margin-left: 0;
     transition: transform 0.3s;
-    position: relative;
+    position: fixed;
+    top: 55px;
+    left: 40px;
+
+
 }
 .nav-hamburger span {
     display: block;
@@ -522,12 +528,15 @@ body {
     pointer-events: none;
     transform: translateY(-100%);
     transition: opacity 0.3s, transform 0.4s cubic-bezier(.77,0,.18,1.01);
-    z-index: 2000; /* niedriger als Hamburger */
+    z-index: 1000; /* bleibt niedriger als .nav-hamburger */
 }
 .nav-dropdown.open {
     opacity: 1;
-    pointer-events: auto;
+    pointer-events: none; /* disable pointer events on background */
     transform: translateY(0);
+}
+.nav-dropdown.open a {
+    pointer-events: auto; /* enable pointer events on links */
 }
 .nav-dropdown a {
     color: #222;
