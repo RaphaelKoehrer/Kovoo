@@ -14,9 +14,19 @@
 
         <div id="header">
             <div id="nav">
-                <div class="nav-item">MORE</div>
+                <button id="navHamburger" aria-label="Menü öffnen" class="nav-hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <div class="nav-logo"><img src="./img/Icon.png" alt="Logo"></div>
-                <div class="nav-item">MORE</div>
+            </div>
+            <div id="navDropdown" class="nav-dropdown">
+                <a href="#">Startseite</a>
+                <a href="#">Leistungen</a>
+                <a href="#">Bundles</a>
+                <a href="#">Über uns</a>
+                <a href="#">Kontakt</a>
             </div>
             <hr>
         </div>
@@ -70,5 +80,18 @@
 
     </div>
     
+    <!-- Cookie Popup -->
+    <div id="cookiePopup" class="cookie-popup">
+        <div class="cookie-popup-content">
+            <p>
+                Diese Website verwendet Cookies, um Ihnen das bestmögliche Erlebnis zu bieten. 
+                Weitere Informationen finden Sie in unserer <a href="#">Datenschutzerklärung</a>.
+            </p>
+            <div class="cookie-popup-actions">
+                <button id="cookieAllow">Akzeptieren</button>
+                <button id="cookieDecline">Ablehnen</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

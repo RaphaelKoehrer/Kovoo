@@ -23,4 +23,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('scroll', animateBoxesOnScroll);
     animateBoxesOnScroll();
+
+    // Cookie Popup
+    const cookiePopup = document.getElementById('cookiePopup');
+    const allowBtn = document.getElementById('cookieAllow');
+    const declineBtn = document.getElementById('cookieDecline');
+
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
+    }
+    function getCookie(name) {
+        const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return v ? v.pop() : '';
+    }
+
+    if (!getCookie('cookieConsent')) {
+        cookiePopup.classList.remove('hide');
+    } else {
+        cookiePopup.classList.add('hide');
+    }
+
+    allowBtn.addEventListener('click', () => {
+        setCookie('cookieConsent', 'allowed', 365);
+        cookiePopup.classList.add('hide');
+    });
+    declineBtn.addEventListener('click', () => {
+        setCookie('cookieConsent', 'declined', 365);
+        cookiePopup.classList.add('hide');
+    });
+
+    // Hamburger Menü Dropdown
+    const navHamburger = document.getElementById('navHamburger');
+    const navDropdown = document.getElementById('navDropdown');
+
+    navHamburger.addEventListener('click', () => {
+        navDropdown.classList.toggle('open');
+        navHamburger.classList.toggle('active');
+    });
+
+    // Schließe das Menü beim Klick außerhalb
+    document.addEventListener('click', (e) => {
+        if (
+            navDropdown.classList.contains('open') &&
+            !navDropdown.contains(e.target) &&
+            !navHamburger.contains(e.target)
+        ) {
+            navDropdown.classList.remove('open');
+            navHamburger.classList.remove('active');
+        }
+    });
 });

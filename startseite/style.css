@@ -30,13 +30,14 @@ body {
 
 #nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 32px;
     height: 60px;
     color: rgb(22, 22, 22);
     font-family: 'Montserrat', sans-serif;
     font-weight: 200;
+    position: relative;
 }
 
 .nav-item {
@@ -47,6 +48,49 @@ body {
     cursor: pointer;
 }
 
+.nav-hamburger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    gap: 6px;
+    z-index: 3001; /* höher als nav-dropdown */
+    margin-right: auto;
+    margin-left: 0;
+    transition: transform 0.3s;
+    position: relative;
+}
+.nav-hamburger span {
+    display: block;
+    height: 3px;
+    width: 28px;
+    background: #222;
+    border-radius: 2px;
+    transition: 0.3s;
+    position: relative;
+}
+.nav-hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.nav-hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.nav-hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+.nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
 .nav-logo img {
     height: 40px;
     width: auto;
@@ -401,5 +445,107 @@ body {
     .service-box, .bundle-box {
         max-width: 98vw;
         padding: 1.2rem 0.5rem;
+    }
+}
+
+/* Cookie Popup Styles */
+.cookie-popup {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background: rgba(255,255,255,0.98);
+    box-shadow: 0 -2px 16px rgba(0,0,0,0.08);
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+    font-family: 'Montserrat', sans-serif;
+}
+.cookie-popup-content {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+}
+.cookie-popup-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.cookie-popup button {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    background: #222;
+    color: #fff;
+    transition: background 0.2s;
+}
+.cookie-popup button#cookieDecline {
+    background: #e0e0e0;
+    color: #222;
+}
+.cookie-popup button:hover {
+    background: #444;
+    color: #fff;
+}
+.cookie-popup button#cookieDecline:hover {
+    background: #ccc;
+    color: #222;
+}
+.cookie-popup.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100%);
+}
+
+.nav-dropdown {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.2rem 0 1.2rem 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-100%);
+    transition: opacity 0.3s, transform 0.4s cubic-bezier(.77,0,.18,1.01);
+    z-index: 2000; /* niedriger als Hamburger */
+}
+.nav-dropdown.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+.nav-dropdown a {
+    color: #222;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+.nav-dropdown a:hover {
+    background: #f0f0f0;
+}
+@media (max-width: 600px) {
+    .nav-dropdown {
+        font-size: 1rem;
+    }
+    .nav-hamburger span {
+        width: 22px;
     }
 }
