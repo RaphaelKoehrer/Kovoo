@@ -39,20 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
         return v ? v.pop() : '';
     }
 
-    if (!getCookie('cookieConsent')) {
-        cookiePopup.classList.remove('hide');
-    } else {
-        cookiePopup.classList.add('hide');
-    }
+    if (cookiePopup) {
+        if (!getCookie('cookieConsent')) {
+            cookiePopup.classList.remove('hide');
+        } else {
+            cookiePopup.classList.add('hide');
+        }
 
-    allowBtn.addEventListener('click', () => {
-        setCookie('cookieConsent', 'allowed', 365);
-        cookiePopup.classList.add('hide');
-    });
-    declineBtn.addEventListener('click', () => {
-        setCookie('cookieConsent', 'declined', 365);
-        cookiePopup.classList.add('hide');
-    });
+        if (allowBtn) {
+            allowBtn.addEventListener('click', () => {
+                setCookie('cookieConsent', 'allowed', 365);
+                cookiePopup.classList.add('hide');
+            });
+        }
+        if (declineBtn) {
+            declineBtn.addEventListener('click', () => {
+                setCookie('cookieConsent', 'declined', 365);
+                cookiePopup.classList.add('hide');
+            });
+        }
+    }
 
     // Hamburger Menü Dropdown
     const navHamburger = document.getElementById('navHamburger');
