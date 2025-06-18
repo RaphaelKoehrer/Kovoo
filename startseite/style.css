@@ -117,8 +117,8 @@ body {
     font-weight: light;
     font-family: 'Montserrat';
     font-weight: 200;
-       color: rgb(22, 22, 22);
-
+    color: rgb(22, 22, 22);
+    text-align: center;
 }
 
 #mainText hr {
