@@ -82,9 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navIcon = document.getElementById('navIcon');
 
     navIcon.addEventListener('click', () => {
-        
-            location.href = 'index.html';
-
+        location.href = 'index.html';
     });
     
 });
