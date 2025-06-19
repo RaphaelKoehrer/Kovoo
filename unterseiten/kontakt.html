@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOVOO | Über uns</title>
+    <title>KOVOO | Kontakt</title>
     <link rel="stylesheet" href="../styling/style.css">
     <link rel="stylesheet" href="../styling/style_info.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -16,7 +16,7 @@
                 <div class="nav-logo"><img src="../images/IconSmall.png" alt="Logo" id="navIcon"></div>
             </div>
             <div id="navDropdown" class="nav-dropdown">
-                 <a href="../index.html">Startseite</a>
+                <a href="../index.html">Startseite</a>
                 <a href="./leistungen.html">Leistungen</a>
                 <a href="./bundles.html">Bundles</a>
                 <a href="./info.html">Über uns</a>
@@ -29,36 +29,28 @@
             <span></span>
         </button>
 
-
         <div id="welcomeText">
             <div id="mainText">
-                <h1>Über uns</h1>
+                <h1>Kontakt</h1>
                 <hr>
-                <h3>Wir sind KOVOO – Ihr Partner für digitale Lösungen.</h3>
+                <h3>Schreiben Sie uns – wir freuen uns auf Ihre Nachricht!</h3>
             </div>
         </div>
 
         <div id="aboutWrapper">
-            <h2>Unser Unternehmen</h2>
+            <h2>Kontaktformular</h2>
+            <form style="display:flex;flex-direction:column;gap:1em;" autocomplete="off">
+                <label for="name"><strong>Name</strong></label>
+                <input type="text" id="name" name="name" required style="padding:0.5em;border-radius:6px;border:1px solid #ccc;">
+                <label for="email"><strong>E-Mail</strong></label>
+                <input type="email" id="email" name="email" required style="padding:0.5em;border-radius:6px;border:1px solid #ccc;">
+                <label for="message"><strong>Nachricht</strong></label>
+                <textarea id="message" name="message" rows="5" required style="padding:0.5em;border-radius:6px;border:1px solid #ccc;"></textarea>
+                <button type="submit" style="background:#1c1c84;color:#fff;padding:0.7em 1.5em;border:none;border-radius:6px;font-size:1em;cursor:pointer;">Absenden</button>
+            </form>
+            <h2>Weitere Kontaktmöglichkeiten</h2>
             <p>
-                KOVOO ist ein junges, kreatives Team aus Digitalexperten. Wir bieten maßgeschneiderte Lösungen in den Bereichen Webentwicklung, Social Media und Grafikdesign.<br><br>
-                Unser Ziel ist es, Unternehmen und Startups mit modernen, effizienten und ansprechenden digitalen Produkten zum Erfolg zu führen.<br><br>
-                <strong>Unsere Werte:</strong>
-                <ul>
-                    <li>Innovation & Kreativität</li>
-                    <li>Transparente Kommunikation</li>
-                    <li>Individuelle Beratung</li>
-                    <li>Verlässlichkeit & Qualität</li>
-                </ul>
-            </p>
-            <h2>Unser Team</h2>
-            <p>
-                Wir sind ein interdisziplinäres Team aus Entwicklern, Designern und Social Media Experten.<br>
-                Gemeinsam bringen wir Ihre Ideen ins Web und auf Social Media – mit Leidenschaft und Know-how.
-            </p>
-            <h2>Kontakt</h2>
-            <p>
-                Sie möchten mehr über uns erfahren? Schreiben Sie uns gerne eine Nachricht über das Kontaktformular!
+                Sie erreichen uns auch per E-Mail an <a href="mailto:max@mustermann.de">max@mustermann.de</a> oder telefonisch unter <a href="tel:+491234567890">+49 123 4567890</a>.
             </p>
         </div>
 
@@ -83,7 +75,6 @@
                 </p>
             </div>
         </footer>
-
     </div>
 
     <div id="cookiePopup" class="cookie-popup">
