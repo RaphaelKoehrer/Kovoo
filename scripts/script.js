@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
         navHamburger.classList.toggle('active');
     });
 
-    // Schließe das Menü beim Klick außerhalb
     document.addEventListener('click', (e) => {
         if (
             navDropdown.classList.contains('open') &&
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navIcon = document.getElementById('navIcon');
 
     navIcon.addEventListener('click', () => {
-            location.href = '../startseite/index.html';
+            location.href = '../index.html';
 
     });
     
