@@ -21,6 +21,14 @@
     --color-nav-dropdown-bg: #fff;
     --color-nav-dropdown-hover: #f0f0f0;
     --color-header-bg: rgba(240, 240, 240, 0.7);
+    --font-size-h1: clamp(2.2rem, 6vw, 5rem);
+    --font-size-h2: clamp(1.3rem, 3vw, 2rem);
+    --font-size-h3: clamp(1.1rem, 2.2vw, 1.7rem);
+    --font-size-p: clamp(1rem, 2vw, 1.13rem);
+    --font-size-nav: clamp(1rem, 2vw, 1.1em);
+    --font-size-footer: clamp(0.97rem, 1.5vw, 1.05rem);
+    --font-size-slider-h1: clamp(1rem, 2vw, 1.5rem);
+    --font-size-slider-p: clamp(0.95rem, 1.5vw, 1rem);
 }
 
 body {
@@ -41,7 +49,7 @@ body {
 
 #header {
     width: 100%;
-    height: 15dvh;
+    height: 120px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -76,6 +84,7 @@ body {
     position: relative;
     margin-top: 0;
     padding-top: 0;
+    font-size: var(--font-size-nav);
 }
 
 #navIcon {
@@ -86,17 +95,16 @@ body {
     flex: 0 0 auto;
     padding: 0 16px;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: var(--font-size-nav);
     cursor: pointer;
 }
 
 .nav-hamburger {
-  border: none;
+    border: none;
     background: transparent;
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     height: 40px;
     width: 40px;
     padding: 0;
@@ -108,9 +116,8 @@ body {
     position: fixed;
     top: 50px;
     left: 120px;
-
-
 }
+
 .nav-hamburger span {
     display: block;
     height: 3px;
@@ -149,11 +156,11 @@ body {
 
 
 #welcomeText {
-    margin-top: 6.5%;
+    margin-top: 10%;
 }
 
 #welcomeText h1 {
-    font-size: 5rem;
+    font-size: var(--font-size-h1);
     font-weight: light;
     font-family: 'Montserrat';
     font-weight: 200;
@@ -172,7 +179,7 @@ body {
 }
 
 #welcomeText h3 {
-    font-size: 2rem;
+    font-size: var(--font-size-h2);
     font-weight: 400;
     font-family: 'Montserrat';
     color: var(--color-text);
@@ -486,13 +493,13 @@ body {
     color: var(--color-navy);
     margin-top: 0;
     margin-bottom: 0.7em;
-    font-size: 2rem;
+    font-size: var(--font-size-h2);
     letter-spacing: 0.01em;
 }
 
 .service-box p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.13rem;
+    font-size: var(--font-size-p);
     color: var(--color-text);
     margin-bottom: 0;
     margin-top: 0.5em;
@@ -559,13 +566,13 @@ body {
     color: var(--color-navy);
     margin-top: 0;
     margin-bottom: 0.7em;
-    font-size: 1.7rem;
+    font-size: var(--font-size-h3);
     letter-spacing: 0.01em;
 }
 
 .bundle-box p {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.08rem;
+    font-size: var(--font-size-p);
     color: var(--color-text);
     margin-bottom: 0;
     margin-top: 0.5em;
@@ -608,6 +615,7 @@ body {
     opacity: 1;
     transform: translateY(0);
     font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-p);
 }
 .cookie-popup-content {
     max-width: 480px;
@@ -679,7 +687,7 @@ body {
     color: var(--color-text-dark);
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.15rem;
+    font-size: var(--font-size-nav);
     padding: 0.5rem 1.5rem;
     border-radius: 6px;
     transition: background 0.2s;
@@ -694,6 +702,19 @@ body {
     .service-box h2, .bundle-box h2 {
         font-size: 1.3rem;
     }
+    .slider-box, .slider-track {
+        min-width: 0;
+        max-width: 220px;
+    }
+    .slider-box {
+        min-width: 220px;
+        max-width: 220px;
+    }
+    .slider-box img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 18 / 10;
+    }
 }
 
 @media (max-width: 600px) {
@@ -703,6 +724,33 @@ body {
     }
     .service-box h2, .bundle-box h2 {
         font-size: 1.1rem;
+    }
+    .slider-track {
+        gap: 0.7rem;
+        padding: 0 0.5rem;
+    }
+    .slider-box {
+        min-width: 160px;
+        max-width: 160px;
+        padding: 0.7rem 0.3rem;
+    }
+    .slider-box h1 {
+        font-size: 1rem;
+    }
+    .slider-box img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 18 / 10;
+    }
+    .footer, #footer, .impressum, #impressum {
+        padding: 1.2rem 0 0.7rem 0;
+        font-size: 0.97rem;
+    }
+    .footer-title, .impressum-title {
+        font-size: 1rem;
+    }
+    .footer-content, .impressum-content {
+        width: 98%;
     }
 }
 
@@ -719,7 +767,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 1.05rem;
+    font-size: var(--font-size-footer);
     letter-spacing: 0.01em;
 }
 
@@ -744,7 +792,7 @@ body {
 }
 
 .footer-title, .impressum-title {
-    font-size: 1.18rem;
+    font-size: calc(var(--font-size-footer) + 0.18rem);
     font-weight: 600;
     margin-bottom: 0.7em;
     color: var(--color-navy);
@@ -759,7 +807,118 @@ body {
     opacity: 0.7;
 }
 
+.horizontal-slider {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.horizontal-slider::-webkit-scrollbar {
+     display: none;
+}
+
+.slider-track {
+    display: flex;
+    gap: 1.5rem;
+    min-width: 1100px; /* damit alle Boxen nebeneinander passen */
+    padding: 0 2rem;
+}
+
+.slider-box {
+    flex: 0 0 300px;
+    background: var(--color-bg-light, #fff);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 300px;
+    max-width: 300px;
+    text-align: center;
+    border: 1px solid var(--color-border, #e0e0e0);
+}
+
+.slider-box h1 {
+    font-size: var(--font-size-slider-h1);
+    margin-bottom: 0.7em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--color-navy, #1c1c84);
+}
+
+.slider-box p {
+    font-size: var(--font-size-slider-p);
+    margin-bottom: 1em;
+    color: var(--color-text, #222);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.slider-box img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 18 / 10;
+    object-fit: cover;
+    background: #eee;
+}
+
+@media (max-width: 900px) {
+    .service-box, .bundle-box {
+        padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+    }
+    .service-box h2, .bundle-box h2 {
+        font-size: 1.3rem;
+    }
+    .slider-box, .slider-track {
+        min-width: 0;
+        max-width: 220px;
+    }
+    .slider-box {
+        min-width: 220px;
+        max-width: 220px;
+    }
+    .slider-box img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 18 / 10;
+    }
+}
+
 @media (max-width: 600px) {
+
+    #welcomeText {
+      margin-top: 35%;
+    }
+
+    .nav-hamburger {
+      left: 30px;
+    }
+
+    .service-box, .bundle-box {
+        padding: 1.1rem 0.7rem 1rem 0.7rem;
+        border-radius: 14px;
+    }
+    .service-box h2, .bundle-box h2 {
+        font-size: 1.1rem;
+    }
+    .slider-track {
+        gap: 0.7rem;
+        padding: 0 0.5rem;
+    }
+    .slider-box {
+        min-width: 160px;
+        max-width: 160px;
+        padding: 0.7rem 0.3rem;
+    }
+    .slider-box h1 {
+        font-size: 1rem;
+    }
+    .slider-box img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 18 / 10;
+    }
     .footer, #footer, .impressum, #impressum {
         padding: 1.2rem 0 0.7rem 0;
         font-size: 0.97rem;
@@ -771,5 +930,4 @@ body {
         width: 98%;
     }
 }
-
 
