@@ -9,20 +9,87 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('#nav', { opacity: 0, y: -30, duration: 0.5, delay: 0.1 });
     gsap.from('.nav-item, .nav-logo', { opacity: 0, y: -10, stagger: 0.1, duration: 0.4, delay: 0.2 });
 
-    const serviceBoxes = document.querySelectorAll('.service-box');
-    const bundleBoxes = document.querySelectorAll('.bundle-box');
-    const allBoxes = [...serviceBoxes, ...bundleBoxes];
-
-    function animateBoxesOnScroll() {
-        allBoxes.forEach((box, i) => {
-            const rect = box.getBoundingClientRect();
-            if (rect.top < window.innerHeight - 80 && !box.classList.contains('visible')) {
-                gsap.to(box, {opacity: 1, y: 0, duration: 0.7, delay: i * 0.15, onStart: () => box.classList.add('visible')});
+    // --- NEU: Animation für Service- und Bundle-Boxen auf der Startseite ---
+    // Service-Boxen (neues flexibles Layout)
+    const serviceRows = document.querySelectorAll('#servicesAltWrapper .service-row');
+    serviceRows.forEach((row, i) => {
+        const fromX = i % 2 === 0 ? -120 : 120;
+        gsap.from(row, {
+            opacity: 0,
+            x: fromX,
+            duration: 0.9,
+            delay: 1.1 + i * 0.18,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: row,
+                start: 'top 85%',
+                toggleActions: 'play none none none'
             }
         });
+    });
+
+    // Bundle-Boxen: Noch früheres Pop-in (scale, y, opacity)
+    const bundleBoxes = document.querySelectorAll('.bundle-box');
+    bundleBoxes.forEach((box, i) => {
+        gsap.fromTo(
+            box,
+            { opacity: 0, scale: 0.85, y: 60 },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.7,
+                delay: 0.3 + i * 0.10, // noch früheres Pop-in
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: box,
+                    start: 'top 99%', // noch früher sichtbar
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
+    });
+
+    // CTA-Bereich (Interesse? Kontaktiere uns!) animieren (früher und unabhängig von delay)
+    const cta = document.querySelector('div[style*="Interesse? Kontaktiere uns!"]');
+    if (cta) {
+        gsap.fromTo(
+            cta,
+            { opacity: 0, scale: 0.92, y: 60 },
+            {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.7,
+                delay: 0.1,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                    trigger: cta,
+                    start: 'top 98%',
+                    toggleActions: 'play none none none'
+                }
+            }
+        );
     }
-    window.addEventListener('scroll', animateBoxesOnScroll);
-    animateBoxesOnScroll();
+
+    // Slider-Boxen Animation (leichtes Einfliegen)
+    const sliderBoxes = document.querySelectorAll('.slider-box');
+    sliderBoxes.forEach((box, i) => {
+        gsap.from(box, {
+            opacity: 0,
+            y: 40,
+            duration: 0.6,
+            delay: 0.7 + i * 0.08,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: box,
+                start: 'top 95%',
+                toggleActions: 'play none none none'
+            }
+        });
+    });
+
+    // --- ENDE NEU ---
 
     // Cookie Popup
     const cookiePopup = document.getElementById('cookiePopup');
