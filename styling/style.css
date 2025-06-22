@@ -803,6 +803,139 @@ body {
     }
 }
 
+/* Neues Service-Layout: volle Breite, keine Box, halbe Viewport-Höhe */
+#servicesAltWrapper {
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.service-row {
+    width: 100vw;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0; /* mehr Abstand oben/unten */
+    margin: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    gap: 0;
+}
+
+.service-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.service-text {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 7vw;
+}
+
+.service-text h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--color-navy);
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 0.7em;
+    letter-spacing: 0.01em;
+    background: none;
+}
+
+.service-text p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.35rem;
+    color: var(--color-text);
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    line-height: 1.7;
+    background: none;
+}
+
+.service-img {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 7vw;
+}
+
+.service-img img {
+    width: 320px;
+    height: 320px;
+    max-width: 40vw;
+    max-height: 40vw;
+    min-width: 180px;
+    min-height: 180px;
+    object-fit: contain;
+    border-radius: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .service-row, .service-row.reverse {
+        flex-direction: column !important;
+        min-height: 60vh;
+        padding: 40px 0; /* auch mobil mehr Abstand */
+    }
+    .service-text, .service-img {
+        padding: 0 5vw;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+    .service-img img {
+        width: 180px;
+        height: 180px;
+        max-width: 60vw;
+        max-height: 60vw;
+    }
+    .service-text h2 {
+        font-size: 1.5rem;
+    }
+    .service-text p {
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .service-row, .service-row.reverse {
+        min-height: 70vw;
+        padding: 25px 0; /* auch mobil mehr Abstand */
+    }
+    .service-text, .service-img {
+        padding: 0 2vw;
+    }
+    .service-img img {
+        width: 120px;
+        height: 120px;
+        max-width: 80vw;
+        max-height: 80vw;
+    }
+    .service-text h2 {
+        font-size: 1.1rem;
+    }
+    .service-text p {
+        font-size: 0.97rem;
+    }
+}
+
 /* Footer / Impressum Styling */
 .footer, #footer, .impressum, #impressum {
     width: 100%;
