@@ -41,7 +41,7 @@
 
         <div id="aboutWrapper">
             <h2>Kontaktformular</h2>
-            <form style="display:flex;flex-direction:column;gap:1em;" autocomplete="off">
+            <form style="display:flex;flex-direction:column;gap:1em;" autocomplete="off" method="POST" action="../scripts/sendmail.php">
                 <label for="name"><strong>Name</strong></label>
                 <input type="text" id="name" name="name" required style="padding:0.5em;border-radius:6px;border:1px solid #ccc;">
                 <label for="email"><strong>E-Mail</strong></label>
@@ -50,6 +50,7 @@
                 <textarea id="message" name="message" rows="5" required style="padding:0.5em;border-radius:6px;border:1px solid #ccc;"></textarea>
                 <button type="submit" style="background:#1c1c84;color:#fff;padding:0.7em 1.5em;border:none;border-radius:6px;font-size:1em;cursor:pointer;">Absenden</button>
             </form>
+            <div id="formMessage" style="margin-top:1em;color:green;"></div>
             <h2>Weitere Kontaktmöglichkeiten</h2>
             <p>
                 Sie erreichen uns auch per E-Mail an <a href="mailto:support@kovoo.at">support@kovoo.at</a> oder telefonisch unter <a href="tel:+4367762118898">+43 (0) 677 6211 8898</a>.

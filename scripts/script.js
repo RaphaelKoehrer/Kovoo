@@ -87,4 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
     
+    // Kontaktformular: Erfolgsmeldung anzeigen
+    const urlParams = new URLSearchParams(window.location.search);
+    const formMessage = document.getElementById('formMessage');
+    if (formMessage) {
+        if (urlParams.get('success') === '1') {
+            formMessage.textContent = "Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.";
+        } else if (urlParams.get('error') === '1') {
+            formMessage.textContent = "Fehler beim Senden. Bitte versuchen Sie es erneut.";
+            formMessage.style.color = "red";
+        }
+    }
 });
