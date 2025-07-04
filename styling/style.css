@@ -717,6 +717,63 @@ body {
     }
 }
 
+.service-img {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 7vw;
+}
+
+.service-img > div:first-child {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.service-social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 340px;
+}
+
+.service-social-icons img {
+    width: 54px;
+    height: 54px;
+    max-width: 22vw;
+    max-height: 22vw;
+    min-width: 32px;
+    min-height: 32px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f8fafc;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    transition: width 0.2s, height 0.2s, transform 0.18s cubic-bezier(.77,0,.18,1.01);
+    /* für GSAP-Animation */
+    will-change: transform;
+}
+
+.service-social-icons img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .service-social-icons img {
+        width: 42px;
+        height: 42px;
+        max-width: 18vw;
+        max-height: 18vw;
+        min-width: 22px;
+        min-height: 22px;
+    }
+}
+
 /* Neues flexibles Service-Layout */
 #servicesAltWrapper {
     width: 100%;
@@ -724,17 +781,14 @@ body {
     margin: 3.5rem auto 2.5rem auto;
     display: flex;
     flex-direction: column;
-    gap: 3.5rem;
 }
 .service-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2.5rem;
     background: #fff;
     border-radius: 22px;
     box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-    padding: 2.5rem 2.2rem;
     border: 1.5px solid #ececec;
 }
 .service-row.reverse {
@@ -993,7 +1047,6 @@ body {
     width: 100%;
     overflow-x: auto;
     padding: 2rem 0;
-    margin: 20rem 0 12rem 0;
 }
 
 .horizontal-slider::-webkit-scrollbar {
@@ -1110,6 +1163,71 @@ body {
     }
     .footer-content, .impressum-content {
         width: 98%;
+    }
+}
+
+.service-social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 340px;
+}
+
+.service-social-icons img {
+    width: 54px;
+    height: 54px;
+    max-width: 22vw;
+    max-height: 22vw;
+    min-width: 32px;
+    min-height: 32px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f8fafc;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    transition: width 0.2s, height 0.2s, transform 0.18s cubic-bezier(.77,0,.18,1.01);
+    /* für GSAP-Animation */
+    will-change: transform;
+}
+
+/* Animation für das erste und zweite Service-Image */
+@keyframes kovoo-wobble {
+    0% { transform: scale(1) rotate(0deg);}
+    15% { transform: scale(1.04) rotate(-2deg);}
+    30% { transform: scale(1.03) rotate(2deg);}
+    45% { transform: scale(1.05) rotate(-1.5deg);}
+    60% { transform: scale(1.03) rotate(1.5deg);}
+    75% { transform: scale(1.04) rotate(-1deg);}
+    100% { transform: scale(1) rotate(0deg);}
+}
+
+/* Ziel: .service-img img[src*="image1.png"], .service-img img[src*="image2.png"] */
+.service-img img[src*="Image1.png"],
+.service-img img[src*="image1.png"],
+.service-img img[src*="image2.png"] {
+    animation: kovoo-wobble 2.2s infinite ease-in-out;
+    transition: transform 0.22s cubic-bezier(.77,0,.18,1.01);
+}
+
+.service-img img[src*="Image1.png"]:hover,
+.service-img img[src*="image1.png"]:hover,
+.service-img img[src*="image2.png"]:hover {
+    animation: kovoo-wobble 0.7s infinite cubic-bezier(.77,0,.18,1.01);
+    transform: scale(1.09) rotate(2deg);
+    z-index: 2;
+}
+
+@media (max-width: 600px) {
+    .service-social-icons img {
+        width: 42px;
+        height: 42px;
+        max-width: 18vw;
+        max-height: 18vw;
+        min-width: 22px;
+        min-height: 22px;
     }
 }
 
