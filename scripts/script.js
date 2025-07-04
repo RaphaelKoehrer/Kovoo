@@ -183,4 +183,33 @@ document.addEventListener('DOMContentLoaded', () => {
             duration: 0.55
         });
     }
+
+    // --- Hintergrund-Farbverlauf beim Scrollen ---
+    (function() {
+        // Farben: von Standard zu dezentem Blau
+        const colorStart = [240, 240, 240]; // #f0f0f0
+        const colorEnd = [220, 230, 255];   // z.B. ein sehr dezentes Blau (#dce6ff)
+        const maxScroll = 1.0;
+
+        function lerp(a, b, t) {
+            return Math.round(a + (b - a) * t);
+        }
+
+        function updateBgColor() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            let progress = docHeight > 0 ? scrollY / docHeight : 0;
+            progress = Math.min(progress, maxScroll) / maxScroll; // clamp & normiert auf 0..1
+
+            const r = lerp(colorStart[0], colorEnd[0], progress);
+            const g = lerp(colorStart[1], colorEnd[1], progress);
+            const b = lerp(colorStart[2], colorEnd[2], progress);
+
+            document.body.style.background = `linear-gradient(to bottom, rgb(${r},${g},${b}) 0%, var(--color-bg-gradient-end) 100%)`;
+        }
+
+        window.addEventListener('scroll', updateBgColor, { passive: true });
+        window.addEventListener('resize', updateBgColor);
+        updateBgColor();
+    })();
 });

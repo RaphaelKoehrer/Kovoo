@@ -35,7 +35,6 @@ body {
     width: 100%;
     height: auto;
     overflow-x: hidden;
-    background-color: var(--color-bg);
     margin: 0;
 }
 
