@@ -186,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Hintergrund-Farbverlauf beim Scrollen ---
     (function() {
-        // Farben: von Standard zu dezentem Blau
         const colorStart = [240, 240, 240]; // #f0f0f0
         const colorEnd = [220, 230, 255];   // z.B. ein sehr dezentes Blau (#dce6ff)
         const maxScroll = 1.0;

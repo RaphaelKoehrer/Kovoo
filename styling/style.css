@@ -1043,9 +1043,11 @@ body {
 }
 
 .horizontal-slider {
+    margin-top: 10%;
     width: 100%;
     overflow-x: auto;
     padding: 2rem 0;
+    z-index: 2;
 }
 
 .horizontal-slider::-webkit-scrollbar {
@@ -1057,6 +1059,7 @@ body {
     gap: 1.5rem;
     min-width: 1100px; /* damit alle Boxen nebeneinander passen */
     padding: 0 2rem;
+    z-index: 1;
 }
 
 .slider-box {
@@ -1068,8 +1071,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 300px;
-    max-width: 300px;
     text-align: center;
     border: 1px solid var(--color-border, #e0e0e0);
 }
@@ -1090,7 +1091,7 @@ body {
 }
 
 .slider-box img {
-    width: 100%;
+    width: 80%;
     height: auto;
     aspect-ratio: 18 / 10;
     object-fit: cover;
@@ -1188,36 +1189,8 @@ body {
     background: #f8fafc;
     box-shadow: 0 1px 4px rgba(0,0,0,0.07);
     transition: width 0.2s, height 0.2s, transform 0.18s cubic-bezier(.77,0,.18,1.01);
-    /* für GSAP-Animation */
-    will-change: transform;
 }
 
-/* Animation für das erste und zweite Service-Image */
-@keyframes kovoo-wobble {
-    0% { transform: scale(1) rotate(0deg);}
-    15% { transform: scale(1.04) rotate(-2deg);}
-    30% { transform: scale(1.03) rotate(2deg);}
-    45% { transform: scale(1.05) rotate(-1.5deg);}
-    60% { transform: scale(1.03) rotate(1.5deg);}
-    75% { transform: scale(1.04) rotate(-1deg);}
-    100% { transform: scale(1) rotate(0deg);}
-}
-
-/* Ziel: .service-img img[src*="image1.png"], .service-img img[src*="image2.png"] */
-.service-img img[src*="Image1.png"],
-.service-img img[src*="image1.png"],
-.service-img img[src*="image2.png"] {
-    animation: kovoo-wobble 2.2s infinite ease-in-out;
-    transition: transform 0.22s cubic-bezier(.77,0,.18,1.01);
-}
-
-.service-img img[src*="Image1.png"]:hover,
-.service-img img[src*="image1.png"]:hover,
-.service-img img[src*="image2.png"]:hover {
-    animation: kovoo-wobble 0.7s infinite cubic-bezier(.77,0,.18,1.01);
-    transform: scale(1.09) rotate(2deg);
-    z-index: 2;
-}
 
 @media (max-width: 600px) {
     .service-social-icons img {
@@ -1227,6 +1200,76 @@ body {
         max-height: 18vw;
         min-width: 22px;
         min-height: 22px;
+    }
+}
+
+.bundles-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .bundles-container {
+        align-items: center;
+    }
+    
+    .bundle-box {
+        width: 90%;
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 600px) {
+    .bundles-container {
+        align-items: center;
+    }
+    
+    .bundle-box {
+        width: 85%;
+    }
+}
+
+/* Custom List Styling */
+#aboutWrapper ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.2em 0;
+}
+
+#aboutWrapper ul li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 0.8em;
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-p);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+#aboutWrapper ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-navy);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#aboutWrapper ul li strong {
+    font-weight: 600;
+    color: var(--color-navy);
+}
+
+@media (max-width: 600px) {
+    #aboutWrapper ul li {
+        padding-left: 1.2em;
+        font-size: 0.97rem;
     }
 }
 
