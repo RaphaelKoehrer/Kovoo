@@ -38,6 +38,8 @@ body {
     margin: 0;
 }
 
+/* Removed page transition classes that conflict with GSAP */
+
 #bodyWrapper {
     width: 100%;
     height: auto;
@@ -553,11 +555,7 @@ body {
     transform: translateY(0);
 }
 
-.bundle-box:hover {
-    box-shadow: 0 12px 48px var(--color-shadow-bundle), 0 4px 24px var(--color-shadow);
-    transform: translateY(-6px) scale(1.025);
-    border-color: var(--color-navy);
-}
+
 
 .bundle-box h2, .bundle-box h3 {
     font-family: 'Montserrat', sans-serif;
@@ -869,7 +867,7 @@ body {
 
 .service-row {
     width: 100vw;
-    min-height: 50vh;
+    min-height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1252,10 +1250,8 @@ body {
 }
 
 #aboutWrapper ul li::before {
-    content: "•";
     position: absolute;
     left: 0;
-    top: 0;
     color: var(--color-navy);
     font-weight: bold;
     font-size: 1.2em;
@@ -1270,6 +1266,53 @@ body {
     #aboutWrapper ul li {
         padding-left: 1.2em;
         font-size: 0.97rem;
+    }
+}
+
+/* Button Styling for "Mehr erfahren" */
+.service-learn-more {
+    display: inline-block;
+    background: linear-gradient(135deg, #1c1c84 0%, #2a2a9a 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 3px 12px rgba(28, 28, 132, 0.3);
+}
+
+.service-learn-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(28, 28, 132, 0.4);
+    background: linear-gradient(135deg, #2a2a9a 0%, #3a3aaa 100%);
+}
+
+@media (max-width: 900px) {
+    .service-learn-more {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+        margin-top: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .service-learn-more {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .service-learn-more {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
     }
 }
 

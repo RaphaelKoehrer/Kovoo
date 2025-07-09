@@ -1,4 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Page fade in animation on load - set initial opacity properly
+    gsap.set(document.body, { opacity: 0 });
+    gsap.to(document.body, { opacity: 1, duration: 0.4, ease: 'power2.out' });
+
+    // Page transition function
+    function fadeToPage(url) {
+        gsap.to(document.body, { 
+            opacity: 0, 
+            duration: 0.3, 
+            ease: 'power2.in',
+            onComplete: () => {
+                window.location.href = url;
+            }
+        });
+    }
+
+    // Add fade transition to all navigation links
+    const navLinks = document.querySelectorAll('#navDropdown a, .nav-item a, .service-learn-more, .contact-cta-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+                e.preventDefault();
+                fadeToPage(href);
+            }
+        });
+    });
+
     // WelcomeText Animation: Container einblenden
     gsap.fromTo('#welcomeText', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
     // Einzelne Elemente nacheinander einblenden
@@ -17,12 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.from(row, {
             opacity: 0,
             x: fromX,
-            duration: 0.9,
-            delay: 1.1 + i * 0.18,
+            duration: 1,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: row,
-                start: 'top 100%', // früheres Laden
+                start: 'top 70%', // früheres Laden
                 toggleActions: 'play none none none'
             }
         });
@@ -148,10 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const navIcon = document.getElementById('navIcon');
 
-    navIcon.addEventListener('click', () => {
-        
-            location.href = 'index.html';
-
+    navIcon.addEventListener('click', (e) => {
+        e.preventDefault();
+        fadeToPage('index.html');
     });
     
     // Kontaktformular: Erfolgsmeldung anzeigen
