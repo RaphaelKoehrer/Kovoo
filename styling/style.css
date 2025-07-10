@@ -1359,6 +1359,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4rem;
+    opacity: 0;
 }
 
 .service-detail-box {
@@ -1371,6 +1372,8 @@ body {
     border: 1.5px solid var(--color-border-light);
     gap: 3rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .service-detail-box:hover {
@@ -1394,6 +1397,156 @@ body {
     height: auto;
     border-radius: 12px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.service-detail-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.service-detail-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--color-navy);
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+}
+
+.service-detail-content p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.service-detail-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5rem 0;
+}
+
+.service-detail-content ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.8rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-text);
+}
+
+.service-detail-content ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-navy);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Animation classes */
+.service-detail-box.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+@media (max-width: 900px) {
+    #servicesDetailWrapper {
+        padding: 0 1rem;
+        gap: 3rem;
+    }
+    
+    .service-detail-box, .service-detail-box.reverse {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .service-detail-img {
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    .service-detail-content h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .service-detail-content p, .service-detail-content ul li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #servicesDetailWrapper {
+        gap: 2rem;
+    }
+    
+    .service-detail-box {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .service-detail-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .service-detail-content p, .service-detail-content ul li {
+        font-size: 0.95rem;
+    }
+
+    
+    .service-detail-content p, .service-detail-content ul li {
+        font-size: 0.95rem;
+    }
+}
+
+/* AboutWrapper Animation Initial State */
+#aboutWrapper {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 900px;
+    margin: 4rem auto 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+#aboutWrapper h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    color: var(--color-navy);
+    margin-bottom: 1.5rem;
+}
+
+#aboutWrapper p {
+    font-size: var(--font-size-p);
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    #aboutWrapper {
+        padding: 0 1rem;
+        margin: 3rem auto 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    #aboutWrapper {
+        margin: 2rem auto 0 auto;
+    }
+    
+    #aboutWrapper h2 {
+        font-size: 1.3rem;
+    }
+    
+    #aboutWrapper p {
+        font-size: 0.95rem;
+    }
 }
 
 .service-detail-content {
@@ -1498,6 +1651,50 @@ body {
 
     
     .service-detail-content p, .service-detail-content ul li {
+        font-size: 0.95rem;
+    }
+}
+
+/* AboutWrapper Animation Initial State */
+#aboutWrapper {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 900px;
+    margin: 4rem auto 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+#aboutWrapper h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    color: var(--color-navy);
+    margin-bottom: 1.5rem;
+}
+
+#aboutWrapper p {
+    font-size: var(--font-size-p);
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    #aboutWrapper {
+        padding: 0 1rem;
+        margin: 3rem auto 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    #aboutWrapper {
+        margin: 2rem auto 0 auto;
+    }
+    
+    #aboutWrapper h2 {
+        font-size: 1.3rem;
+    }
+    
+    #aboutWrapper p {
         font-size: 0.95rem;
     }
 }

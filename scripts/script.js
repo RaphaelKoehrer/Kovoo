@@ -159,26 +159,122 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- ENDE NEU ---
 
     // --- Service Detail Boxes Animation (Leistungen page) ---
-    const serviceDetailBoxes = document.querySelectorAll('.service-detail-box.animate-on-scroll');
-    serviceDetailBoxes.forEach((box, i) => {
+    const servicesDetailWrapper = document.getElementById('servicesDetailWrapper');
+    if (servicesDetailWrapper) {
+        // Animate the entire wrapper container
         gsap.fromTo(
-            box,
+            servicesDetailWrapper,
             { 
-                y: 80,
+                opacity: 0,
+                y: 60 
             },
             {
+                opacity: 1,
                 y: 0,
-                duration: 0.5,
-                delay: 0.5,
-                ease: 'power3.out',
+                duration: 0.8,
+                ease: 'power2.out',
                 scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
-                    trigger: box,
-                    start: 'top 90%',
+                    trigger: servicesDetailWrapper,
+                    start: 'top 80%',
                     toggleActions: 'play none none none'
                 } : undefined
             }
         );
-    });
+
+        // Animate individual service detail boxes when they come into view
+        const serviceDetailBoxes = servicesDetailWrapper.querySelectorAll('.service-detail-box');
+        serviceDetailBoxes.forEach((box, boxIndex) => {
+            // Animate the box container when it comes into view
+            gsap.fromTo(
+                box,
+                { 
+                    opacity: 0,
+                    y: 80 
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
+                        trigger: box,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    } : undefined
+                }
+            );
+
+            // Animate individual text elements within each box with stagger
+            const textElements = box.querySelectorAll('h2, p, ul, li');
+            gsap.fromTo(
+                textElements,
+                { 
+                    opacity: 0,
+                    y: 30 
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    delay: 0.2,
+                    ease: 'power2.out',
+                    scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
+                        trigger: box,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    } : undefined
+                }
+            );
+        });
+    }
+
+    // --- AboutWrapper Animation (Leistungen page) ---
+    const aboutWrapper = document.getElementById('aboutWrapper');
+    if (aboutWrapper) {
+        // Animate the entire wrapper container
+        gsap.fromTo(
+            aboutWrapper,
+            { 
+                opacity: 0,
+                y: 60 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
+                    trigger: aboutWrapper,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                } : undefined
+            }
+        );
+
+        // Animate individual elements with stagger
+        const aboutElements = aboutWrapper.querySelectorAll('h2, p, ul, .bundles-cta');
+        gsap.fromTo(
+            aboutElements,
+            { 
+                opacity: 0,
+                y: 30 
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                delay: 0.2,
+                ease: 'power2.out',
+                scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
+                    trigger: aboutWrapper,
+                    start: 'top 75%',
+                    toggleActions: 'play none none none'
+                } : undefined
+            }
+        );
+    }
 
     // Cookie Popup
     const cookiePopup = document.getElementById('cookiePopup');
