@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if GSAP and ScrollTrigger are available
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP is not loaded');
+        return;
+    }
+
+    // Register ScrollTrigger plugin early
+    if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    } else {
+        console.warn('ScrollTrigger plugin is not loaded');
+    }
+
     // Page fade in animation on load - set initial opacity properly
     gsap.set(document.body, { opacity: 0 });
     gsap.to(document.body, { opacity: 1, duration: 0.4, ease: 'power2.out' });
@@ -104,19 +117,68 @@ document.addEventListener('DOMContentLoaded', () => {
     sliderBoxes.forEach((box, i) => {
         gsap.from(box, {
             opacity: 0,
-            y: 40,
+            y: 20,
             duration: 0.6,
-            delay: 0.7 + i * 0.08,
+            delay: 0.5,
             ease: 'power2.out',
             scrollTrigger: {
                 trigger: box,
-                start: 'top 95%',
+                start: 'top 90%',
                 toggleActions: 'play none none none'
             }
+        });
+
+        // GSAP Hover Animation für Slider-Boxen
+        box.addEventListener('mouseenter', () => {
+            gsap.to(box, {
+                y: -8,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                duration: 0.5,
+                ease: 'power2.out'
+            });
+            gsap.to(box, {
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        box.addEventListener('mouseleave', () => {
+            gsap.to(box, {
+                y: 0,
+                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+            gsap.to(box, {
+                duration: 0.3,
+                ease: 'power2.out'
+            });
         });
     });
 
     // --- ENDE NEU ---
+
+    // --- Service Detail Boxes Animation (Leistungen page) ---
+    const serviceDetailBoxes = document.querySelectorAll('.service-detail-box.animate-on-scroll');
+    serviceDetailBoxes.forEach((box, i) => {
+        gsap.fromTo(
+            box,
+            { 
+                y: 80,
+            },
+            {
+                y: 0,
+                duration: 0.5,
+                delay: 0.5,
+                ease: 'power3.out',
+                scrollTrigger: typeof ScrollTrigger !== 'undefined' ? {
+                    trigger: box,
+                    start: 'top 90%',
+                    toggleActions: 'play none none none'
+                } : undefined
+            }
+        );
+    });
 
     // Cookie Popup
     const cookiePopup = document.getElementById('cookiePopup');
@@ -177,7 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navIcon.addEventListener('click', (e) => {
         e.preventDefault();
-        fadeToPage('index.html');
+        // Check if we're in a subdirectory by looking for '../' in current links
+        const isSubpage = document.querySelector('a[href*="../"]') !== null;
+        const indexPath = isSubpage ? '../index.html' : 'index.html';
+        fadeToPage(indexPath);
     });
     
     // Kontaktformular: Erfolgsmeldung anzeigen

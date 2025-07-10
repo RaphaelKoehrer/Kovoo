@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styling/style.css">
     <link rel="stylesheet" href="../styling/style_info.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="../scripts/script.js" defer></script>
     <link rel="icon" href="../images/IconHeader.png">
     <style>
@@ -51,6 +52,17 @@
         .bundles-cta:hover .arrow {
             transform: translateX(5px);
         }
+
+        .service-detail-box {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .service-detail-box.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -82,7 +94,7 @@
         </div>
 
         <div id="servicesDetailWrapper">
-            <div class="service-detail-box" id="website-entwicklung">
+            <div class="service-detail-box animate-on-scroll" id="website-entwicklung">
                 <div class="service-detail-img">
                     <img src="../images/leistungen_image1.png" alt="Website Entwicklung">
                 </div>
@@ -104,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="service-detail-box reverse" id="social-media">
+            <div class="service-detail-box reverse animate-on-scroll" id="social-media">
                 <div class="service-detail-img">
                     <img src="../images/leistungen_image2.jpg" alt="Social Media Content">
                 </div>
@@ -127,7 +139,7 @@
                 </div>
             </div>
 
-            <div class="service-detail-box" id="logo-design">
+            <div class="service-detail-box animate-on-scroll" id="logo-design">
                 <div class="service-detail-img">
                     <img src="../images/leistungen_image3.jpg" alt="Logo & Grafikdesign">
                 </div>
@@ -210,5 +222,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const boxes = document.querySelectorAll('.service-detail-box');
+
+        boxes.forEach((box) => {
+            ScrollTrigger.create({
+                trigger: box,
+                start: "top 80%",
+                onEnter: () => {
+                    box.classList.add('animate');
+                },
+                onLeaveBack: () => {
+                    box.classList.remove('animate');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
