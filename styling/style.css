@@ -82,7 +82,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 0 32px;
     height: 60px;
     color: var(--color-text);

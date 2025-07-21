@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars(trim($_POST["message"] ?? ''));
 
     if ($name && $email && $message) {
-        $to      = "support@vokoo.at";
+        $to      = "support@kovoo.at";
         $subject = "Kontaktformular Nachricht von $name";
         $headers = "From: $email\r\nReply-To: $email\r\nContent-Type: text/plain; charset=UTF-8";
         $body    = "Name: $name\nE-Mail: $email\n\nNachricht:\n$message";
