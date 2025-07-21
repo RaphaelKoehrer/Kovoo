@@ -398,4 +398,66 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', updateBgColor);
         updateBgColor();
     })();
+
+    // Dynamic Footer Loading
+    function loadFooter() {
+        try {
+            // Footer data directly in JavaScript
+            const footerData = {
+                title: "Impressum & Kontakt",
+                name: "Raphael Köhrer",
+                address: "Am Sonnenhang 6, A - 4615 Holzhausen",
+                email: "support@kovoo.at",
+                phone: "+4367762118898",
+                phoneDisplay: "+43 (0) 677 6211 8898",
+                copyright: "© 2025 Raphael Köhrer. Alle Rechte vorbehalten."
+            };
+            
+            // Determine the correct path based on current location
+            const isSubpage = window.location.pathname.includes('/unterseiten/');
+            const datenschutzPath = isSubpage ? '../datenschutz.html' : './datenschutz.html';
+            const impressumPath = isSubpage ? '../impressum.html' : './impressum.html';
+            
+            const footerHTML = `
+                <div class="footer-content">
+                    <div class="footer-title">${footerData.title}</div>
+                    <hr class="footer-hr">
+                    <p>
+                        ${footerData.name}<br>
+                        ${footerData.address}<br>
+                        <a href="mailto:${footerData.email}">${footerData.email}</a> | 
+                        <a href="tel:${footerData.phone}">${footerData.phoneDisplay}</a>
+                    </p>
+                    <p>
+                        <a href="${datenschutzPath}">Datenschutz</a> &nbsp;|&nbsp; 
+                        <a href="${impressumPath}">Impressum</a>
+                    </p>
+                    <p style="margin-top:1.2em;font-size:0.97em;opacity:0.7;">
+                        ${footerData.copyright}
+                    </p>
+                </div>
+            `;
+            
+            const footerElement = document.querySelector('.footer, #footer');
+            if (footerElement) {
+                footerElement.innerHTML = footerHTML;
+            }
+        } catch (error) {
+            console.error('Error loading footer:', error);
+            // Fallback footer if loading fails
+            const footerElement = document.querySelector('.footer, #footer');
+            if (footerElement) {
+                footerElement.innerHTML = `
+                    <div class="footer-content">
+                        <div class="footer-title">Kontakt</div>
+                        <hr class="footer-hr">
+                        <p>Bei Fragen kontaktieren Sie uns per E-Mail.</p>
+                    </div>
+                `;
+            }
+        }
+    }
+
+    // Load footer dynamically
+    loadFooter();
 });
