@@ -51,19 +51,24 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('.nav-item, .nav-logo', { opacity: 0, y: -10, stagger: 0.1, duration: 0.4, delay: 0.2 });
 
     // --- NEU: Animation für Service- und Bundle-Boxen auf der Startseite ---
-    // Service-Boxen (neues flexibles Layout)
+    // Service-Boxen (neues flexibles Layout) - Schnellere Animation
     const serviceRows = document.querySelectorAll('#servicesAltWrapper .service-row');
     serviceRows.forEach((row, i) => {
-        const fromX = i % 2 === 0 ? -120 : 120;
-        gsap.from(row, {
-            opacity: 0,
-            x: fromX,
-            duration: 1,
-            ease: 'power3.out',
+        const fromX = i % 2 === 0 ? -60 : 60; // Noch weniger Distanz
+        
+        // Set initial state
+        gsap.set(row, { opacity: 0, x: fromX });
+        
+        gsap.to(row, {
+            opacity: 1,
+            x: 0,
+            duration: 0.5, // Schnellere Animation
+            ease: 'power2.out', // Schnellerer Easing
             scrollTrigger: {
                 trigger: row,
-                start: 'top 70%', // früheres Laden
-                toggleActions: 'play none none none'
+                start: 'top 80%', // Viel früher starten
+                toggleActions: 'play none none none',
+                once: true
             }
         });
     });
@@ -73,18 +78,19 @@ document.addEventListener('DOMContentLoaded', () => {
     bundleBoxes.forEach((box, i) => {
         gsap.fromTo(
             box,
-            { opacity: 0, scale: 0.85, y: 60 },
+            { opacity: 0, scale: 0.95, y: 30 }, // Noch sanftere Ausgangswerte
             {
                 opacity: 1,
                 scale: 1,
                 y: 0,
-                duration: 0.7,
-                delay: 0.3 + i * 0.10, // noch früheres Pop-in
-                ease: 'back.out(1.7)',
+                duration: 0.6, // Schnellere Duration
+                delay: 0.1 + i * 0.08, // Kürzere Verzögerung
+                ease: 'power2.out',
                 scrollTrigger: {
                     trigger: box,
-                    start: 'top 99%', // noch früher sichtbar
-                    toggleActions: 'play none none none'
+                    start: 'top 95%', // Früher starten
+                    toggleActions: 'play none none none',
+                    once: true
                 }
             }
         );

@@ -175,9 +175,9 @@ body {
 }
 
 #welcomeText img {
-  position: relative;
-  top: 33px;
-  width: 250px;
+    top: 33px;
+    position: relative;
+    width: 250px;
 }
 
 #mainText hr {
@@ -1793,3 +1793,8 @@ body {
     }
 }
 
+@media (max-width: 550px) {
+    #welcomeText img {
+        top: 0;
+    }
+}
