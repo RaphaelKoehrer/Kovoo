@@ -190,6 +190,7 @@ body {
     font-family: 'Montserrat';
     color: var(--color-text);
     text-align: center;
+    padding: 0 25px;
 }
 
 
@@ -1417,7 +1418,7 @@ body {
 #aboutWrapper ul {
     list-style: none;
     padding-left: 0;
-    margin: 1.2em 0;
+    margin: 1.2em ;
 }
 
 #aboutWrapper ul li {
