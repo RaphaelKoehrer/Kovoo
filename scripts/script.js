@@ -163,30 +163,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
-            // Improve hover interaction with smooth transitions
-            const slider = document.querySelector('.horizontal-slider');
-            
             // Set initial timeScale
             scrollTween.timeScale(1);
             
-            slider.addEventListener('mouseenter', () => {
-                // Gradually slow down the animation to nearly stopped
-                gsap.to(scrollTween, {
-                    timeScale: 0.1, // Slow to 10% speed (not fully stopped for subtle movement)
-                    duration: 0.8, // Time it takes to slow down
-                    ease: "power2.out"
-                });
-            });
+            // Track if any box is currently being hovered
+            let boxHoverCount = 0;
             
-            slider.addEventListener('mouseleave', () => {
-                // Gradually speed up the animation back to normal
-                gsap.to(scrollTween, {
-                    timeScale: 1, // Back to normal speed
-                    duration: 0.4, // Time it takes to speed up
-                    ease: "power2.in"
+            // Add event listeners to all slider boxes (original and cloned)
+            const allSliderBoxes = document.querySelectorAll('.slider-box');
+            allSliderBoxes.forEach(box => {
+                box.addEventListener('mouseenter', () => {
+                    boxHoverCount++;
+                    // Slow down animation when hovering over any box
+                    gsap.to(scrollTween, {
+                        timeScale: 0.1, // Slow to 10% speed
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                });
+                
+                box.addEventListener('mouseleave', () => {
+                    boxHoverCount--;
+                    // Only speed up if no boxes are being hovered
+                    if (boxHoverCount <= 0) {
+                        boxHoverCount = 0; // Ensure counter never goes negative
+                        gsap.to(scrollTween, {
+                            timeScale: 1, // Back to normal speed
+                            duration: 0.4,
+                            ease: "power2.in"
+                        });
+                    }
                 });
             });
-                    }
+        }
     }
     
     // Call the infinite slider setup
