@@ -154,6 +154,11 @@ body {
 .nav-logo img {
     height: 40px;
     width: auto;
+    transition: 0.25s ease-in-out;
+}
+
+.nav-logo img:hover {
+    transform: scale(1.05 );
 }
 
 #nav img {
@@ -1147,11 +1152,6 @@ body {
     pointer-events: none;
 }
 
-.slider-box * {
-    position: relative;
-    z-index: 1;
-}
-
 /* Footer / Impressum Styling */
 .footer, #footer, .impressum, #impressum {
     width: 100%;
@@ -1550,5 +1550,169 @@ body {
 @media (max-width: 550px) {
     #welcomeText img {
         top: 0;
+    }
+}
+
+/* Redesigned pricing info section with animations that match site aesthetic */
+.pricing-info {
+    background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
+    border-radius: 20px;
+    padding: 2.2rem 2.5rem;
+    margin: 2.5rem auto 3.5rem auto;
+    max-width: 900px;
+    border: 2px solid var(--color-navy);
+    box-shadow: 0 8px 32px var(--color-shadow), 0 4px 16px var(--color-shadow-bundle);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(0);
+}
+
+/* Subtle background decoration */
+.pricing-info::before {
+    content: "";
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-bg-gradient-end) 100%);
+    opacity: 0.08;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    animation: rotate 20s infinite linear;
+}
+
+/* Small currency icons for visual interest */
+.pricing-info::after {
+    content: "€";
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    font-size: 2.8rem;
+    color: rgba(28, 28, 132, 0.07);
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    z-index: 0;
+}
+
+.pricing-info h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--color-navy);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: var(--font-size-h3);
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+/* Animated underline for the heading */
+.pricing-info h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-navy) 0%, #3a3ab9 100%);
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 2px;
+}
+
+.pricing-info:hover h3::after {
+    width: 100%;
+}
+
+.pricing-info p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: var(--font-size-p);
+    color: var(--color-text);
+    line-height: 1.7;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* On hover animation */
+.pricing-info:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--color-shadow), 0 8px 24px rgba(28, 28, 132, 0.15);
+    border-color: #3a3ab9;
+}
+
+/* Add subtle pulse animation to the box */
+@keyframes pulse {
+    0% { box-shadow: 0 8px 32px var(--color-shadow), 0 4px 16px var(--color-shadow-bundle); }
+    50% { box-shadow: 0 12px 40px var(--color-shadow), 0 6px 20px rgba(28, 28, 132, 0.15); }
+    100% { box-shadow: 0 8px 32px var(--color-shadow), 0 4px 16px var(--color-shadow-bundle); }
+}
+
+/* Rotate animation for background element */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Add subtle pulse animation when visible on screen */
+.pricing-info.animate {
+    animation: pulse 4s infinite ease-in-out;
+}
+
+/* Update bundle price and savings styles to match */
+.bundle-price {
+    font-weight: 600;
+    color: var(--color-navy);
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.bundle-savings {
+    color: #2d6e3e;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* For GSAP animation - add class to HTML element */
+.pricing-info-animate {
+    opacity: 0; /* Will be animated with GSAP */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    .pricing-info {
+        padding: 1.8rem;
+        border-radius: 16px;
+        margin: 2rem auto 3rem auto;
+    }
+    
+    .pricing-info::after {
+        font-size: 2.2rem;
+        bottom: 15px;
+        right: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .pricing-info {
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem auto 2.5rem auto;
+    }
+    
+    .pricing-info::after {
+        font-size: 1.8rem;
+        bottom: 12px;
+        right: 15px;
+    }
+    
+    .pricing-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .pricing-info p {
+        font-size: 0.95rem;
     }
 }

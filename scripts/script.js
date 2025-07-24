@@ -399,6 +399,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    if (document.querySelector('.pricing-info-animate')) {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    gsap.fromTo('.pricing-info-animate', 
+        {
+            opacity: 0,
+            y: 60
+        }, 
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: '.pricing-info-animate',
+                start: "top 80%",
+                toggleClass: {targets: '.pricing-info', className: 'animate'}
+            }
+        }
+    );
+}
+
     // Social Media Icons Wave Animation
     const socialIcons = document.querySelectorAll('.service-social-icons img');
     if (socialIcons.length > 0 && window.gsap) {
