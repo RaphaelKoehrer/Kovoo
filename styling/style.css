@@ -1,5 +1,6 @@
 :root {
     --color-bg: #f0f0f0;
+    --color-box-hover: #c9d8ff;
     --color-bg-light: #fff;
     --color-bg-gradient-start: #f8fafc;
     --color-bg-gradient-end: #e0e7ef;
@@ -1089,7 +1090,7 @@ body {
 
 .slider-box {
     flex: 0 0 300px;
-    background: var(--color-bg-light, #fff);
+    background-color: var(--color-bg-light, #fff);
     border-radius: 18px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     padding: 2rem 1.5rem 1.8rem 1.5rem;
@@ -1100,7 +1101,39 @@ body {
     border: 1.5px solid var(--color-border, #e0e0e0);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     left: 2%;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                background-color 0.3s ease,
+                box-shadow 0.4s ease,
+                border-color 0.3s ease;
+}
+
+.slider-box:hover {
+    background-color: var(--color-box-hover);
+    border-color: var(--color-navy);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15),
+                0 12px 20px rgba(28,28,132,0.12),
+                0 5px 10px rgba(0,0,0,0.08);
+}
+
+.slider-box:hover .slider-icon {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.12);
+    background: linear-gradient(135deg, #f8fafc 0%, #d0daec 100%);
+}
+
+/* Add subtle heading color effect */
+.slider-box:hover h1 {
+    background: linear-gradient(135deg, #1c1c84 0%, #3a3ab9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Add transition to child elements */
+.slider-icon, .slider-box h1 {
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease;
 }
 
 /* Remove the CSS hover rule - will be handled by GSAP */

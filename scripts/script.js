@@ -163,34 +163,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
-            // Pause/resume on hover
+            // Improve hover interaction with smooth transitions
             const slider = document.querySelector('.horizontal-slider');
-            slider.addEventListener('mouseenter', () => scrollTween.pause());
-            slider.addEventListener('mouseleave', () => scrollTween.play());
             
-            // Make cloned boxes interactive too
-            const allBoxes = document.querySelectorAll('.slider-box');
-            allBoxes.forEach((box) => {
-                // GSAP Hover Animation for all boxes
-                box.addEventListener('mouseenter', () => {
-                    gsap.to(box, {
-                        y: -8,
-                        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                        duration: 0.5,
-                        ease: 'power2.out'
-                    });
-                });
-
-                box.addEventListener('mouseleave', () => {
-                    gsap.to(box, {
-                        y: 0,
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
+            // Set initial timeScale
+            scrollTween.timeScale(1);
+            
+            slider.addEventListener('mouseenter', () => {
+                // Gradually slow down the animation to nearly stopped
+                gsap.to(scrollTween, {
+                    timeScale: 0.1, // Slow to 10% speed (not fully stopped for subtle movement)
+                    duration: 0.8, // Time it takes to slow down
+                    ease: "power2.out"
                 });
             });
-        }
+            
+            slider.addEventListener('mouseleave', () => {
+                // Gradually speed up the animation back to normal
+                gsap.to(scrollTween, {
+                    timeScale: 1, // Back to normal speed
+                    duration: 0.4, // Time it takes to speed up
+                    ease: "power2.in"
+                });
+            });
+                    }
     }
     
     // Call the infinite slider setup
