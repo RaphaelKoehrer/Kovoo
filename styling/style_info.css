@@ -464,7 +464,7 @@
     #aboutWrapper {
         padding: 1.5rem 1rem 1.8rem 1rem;
         border-radius: 16px;
-        width: 90%;
+        width: 85%;
         margin: 15% auto;
         max-width: 450px;
     }
@@ -525,7 +525,7 @@
         padding: 1.5rem 1rem;
         border-radius: 20px;
         margin: 0 auto;
-        width: 95%;
+        width: 100%;
         max-width: 450px;
         box-sizing: border-box;
     }
@@ -751,8 +751,6 @@
 body {
     margin: 0;
 }
-
-
 
 
 #nav {

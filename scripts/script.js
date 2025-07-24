@@ -118,49 +118,84 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    // Slider-Boxen Animation (leichtes Einfliegen)
-    const sliderBoxes = document.querySelectorAll('.slider-box');
-    sliderBoxes.forEach((box, i) => {
-        gsap.from(box, {
+    // --- INFINITE HORIZONTAL SLIDER IMPLEMENTATION ---
+    function setupInfiniteSlider() {
+        const sliderTrack = document.querySelector('.slider-track');
+        const sliderBoxes = document.querySelectorAll('.slider-box');
+        
+        if (!sliderTrack || sliderBoxes.length === 0) return;
+        
+        // First animate in the original boxes with staggered effect
+        gsap.from(sliderBoxes, {
             opacity: 0,
             y: 20,
             duration: 0.6,
-            delay: 0.5,
+            stagger: 0.1,
+            delay: 0.3,
             ease: 'power2.out',
-            scrollTrigger: {
-                trigger: box,
-                start: 'top 90%',
-                toggleActions: 'play none none none'
-            }
+            onComplete: initInfiniteScroll // Start infinite scroll after initial animation
         });
+        
+        function initInfiniteScroll() {
+            // Clone slider boxes and append them to create the infinite effect
+            const boxesToClone = Array.from(sliderBoxes);
+            boxesToClone.forEach(box => {
+                const clone = box.cloneNode(true);
+                sliderTrack.appendChild(clone);
+            });
+            
+            // Calculate the width of one complete set of boxes
+            const boxWidth = sliderBoxes[0].offsetWidth;
+            const gap = parseFloat(getComputedStyle(sliderTrack).columnGap || '1.5rem');
+            const totalWidth = sliderBoxes.length * (boxWidth + gap);
+            
+            // Create the infinite scrolling animation
+            const scrollTween = gsap.timeline({repeat: -1, paused: false});
+            
+            // Animate to the end of the original boxes
+            scrollTween.to(sliderTrack, {
+                x: -totalWidth, // Move exactly one set width
+                duration: 30, // Duration in seconds - adjust for speed
+                ease: "linear",
+                onComplete: () => {
+                    // Reset position to start for seamless loop
+                    gsap.set(sliderTrack, { x: 0 });
+                }
+            });
+            
+            // Pause/resume on hover
+            const slider = document.querySelector('.horizontal-slider');
+            slider.addEventListener('mouseenter', () => scrollTween.pause());
+            slider.addEventListener('mouseleave', () => scrollTween.play());
+            
+            // Make cloned boxes interactive too
+            const allBoxes = document.querySelectorAll('.slider-box');
+            allBoxes.forEach((box) => {
+                // GSAP Hover Animation for all boxes
+                box.addEventListener('mouseenter', () => {
+                    gsap.to(box, {
+                        y: -8,
+                        boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                        duration: 0.5,
+                        ease: 'power2.out'
+                    });
+                });
 
-        // GSAP Hover Animation für Slider-Boxen
-        box.addEventListener('mouseenter', () => {
-            gsap.to(box, {
-                y: -8,
-                boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-                duration: 0.5,
-                ease: 'power2.out'
+                box.addEventListener('mouseleave', () => {
+                    gsap.to(box, {
+                        y: 0,
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                });
             });
-            gsap.to(box, {
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-
-        box.addEventListener('mouseleave', () => {
-            gsap.to(box, {
-                y: 0,
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-            gsap.to(box, {
-                duration: 0.3,
-                ease: 'power2.out'
-            });
-        });
-    });
+        }
+    }
+    
+    // Call the infinite slider setup
+    setupInfiniteSlider();
+    
 
     // --- ENDE NEU ---
 
