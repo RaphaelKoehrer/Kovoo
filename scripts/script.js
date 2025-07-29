@@ -332,9 +332,19 @@ document.addEventListener('DOMContentLoaded', () => {
         d.setTime(d.getTime() + (days*24*60*60*1000));
         document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/";
     }
+    
     function getCookie(name) {
         const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
         return v ? v.pop() : '';
+    }
+
+    function deleteCookie(name) {
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+    }
+
+    // Funktion um zu prüfen ob Cookies erlaubt sind
+    function areCookiesAllowed() {
+        return getCookie('cookieConsent') === 'allowed';
     }
 
     if (cookiePopup) {
@@ -348,12 +358,17 @@ document.addEventListener('DOMContentLoaded', () => {
             allowBtn.addEventListener('click', () => {
                 setCookie('cookieConsent', 'allowed', 365);
                 cookiePopup.classList.add('hide');
+                console.log('Cookies akzeptiert');
+                // Hier könntest du Analytics oder andere Tracking-Scripts laden
             });
         }
+        
         if (declineBtn) {
             declineBtn.addEventListener('click', () => {
                 setCookie('cookieConsent', 'declined', 365);
                 cookiePopup.classList.add('hide');
+                console.log('Cookies abgelehnt');
+                // Stelle sicher, dass keine Tracking-Cookies gesetzt werden
             });
         }
     }
@@ -473,12 +488,22 @@ document.addEventListener('DOMContentLoaded', () => {
             // Footer data directly in JavaScript
             const footerData = {
                 title: "Impressum & Kontakt",
-                name: "Raphael Köhrer",
+                companyName: "KOVOO",
+                contacts: [
+                    {
+                        name: "Raphael Köhrer",
+                        phone: "+4367762118898",
+                        phoneDisplay: "+43 (0) 677 6211 8898"
+                    },
+                    {
+                        name: "Thomas Vokal",
+                        phone: "+4367762552986",
+                        phoneDisplay: "+43 (0) 677 6255 2986"
+                    }
+                ],
                 address: "Am Sonnenhang 6, A - 4615 Holzhausen",
                 email: "support@kovoo.at",
-                phone: "+4367762118898",
-                phoneDisplay: "+43 (0) 677 6211 8898",
-                copyright: "© 2025 Raphael Köhrer. Alle Rechte vorbehalten."
+                copyright: "© 2025 KOVOO. Alle Rechte vorbehalten."
             };
             
             // Determine the correct path based on current location
@@ -491,10 +516,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="footer-title">${footerData.title}</div>
                     <hr class="footer-hr">
                     <p>
-                        ${footerData.name}<br>
+                        <strong>${footerData.companyName}</strong><br>
                         ${footerData.address}<br>
-                        <a href="mailto:${footerData.email}">${footerData.email}</a> | 
-                        <a href="tel:${footerData.phone}">${footerData.phoneDisplay}</a>
+                        <a href="mailto:${footerData.email}">${footerData.email}</a>
+                    </p>
+                    <p>
+                        <strong>Kontakte:</strong><br>
+                        ${footerData.contacts[0].name}: <a href="tel:${footerData.contacts[0].phone}">${footerData.contacts[0].phoneDisplay}</a><br>
+                        ${footerData.contacts[1].name}: <a href="tel:${footerData.contacts[1].phone}">${footerData.contacts[1].phoneDisplay}</a>
                     </p>
                     <p>
                         <a href="${datenschutzPath}">Datenschutz</a> &nbsp;|&nbsp; 
