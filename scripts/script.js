@@ -171,8 +171,239 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Subpage-specific background animations
+    function initSubpageBackgrounds() {
+        // Ensure scroll elements exist and animate them for all subpages
+        const scrollLogo1 = document.getElementById('scrollLogo1');
+        const scrollLogo2 = document.getElementById('scrollLogo2');
+        const scrollCode1 = document.getElementById('scrollCode1');
+        const scrollCode2 = document.getElementById('scrollCode2');
+
+        if (scrollLogo1 && scrollLogo2 && scrollCode1 && scrollCode2) {
+            // Position the scroll elements initially for subpages
+            gsap.set(scrollLogo1, { x: '15vw', y: '25vh', rotation: 0 });
+            gsap.set(scrollLogo2, { x: '75vw', y: '65vh', rotation: 30 });
+            gsap.set(scrollCode1, { x: '8vw', y: '55vh', rotation: 0 });
+            gsap.set(scrollCode2, { x: '85vw', y: '15vh', rotation: -10 });
+
+            // Create scroll-triggered animations for subpage logos
+            gsap.to(scrollLogo1, {
+                x: '85vw',
+                y: '5vh',
+                rotation: 120,
+                scale: 1.3,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.2
+                }
+            });
+
+            gsap.to(scrollLogo2, {
+                x: '25vw',
+                y: '35vh',
+                rotation: -60,
+                scale: 0.7,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.8
+                }
+            });
+
+            // Create scroll-triggered animations for subpage code blocks
+            gsap.to(scrollCode1, {
+                x: '75vw',
+                y: '75vh',
+                rotation: 20,
+                scale: 1.2,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.9
+                }
+            });
+
+            gsap.to(scrollCode2, {
+                x: '15vw',
+                y: '45vh',
+                rotation: 30,
+                scale: 0.8,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.5
+                }
+            });
+        }
+
+        // Animate tech shapes for all pages
+        const techShapes = document.querySelectorAll('.tech-shape');
+        if (techShapes.length > 0) {
+            techShapes.forEach((shape, index) => {
+                gsap.to(shape, {
+                    y: `${-120 - (index * 35)}px`,
+                    rotation: `${400 + (index * 60)}deg`,
+                    scale: 1.1 + (index * 0.1),
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 2.5 + (index * 0.4)
+                    }
+                });
+            });
+        }
+
+        // Detect current page
+        const currentPage = window.location.pathname;
+        
+        // Enhanced animations for service icons (Leistungen page)
+        const serviceIcons = document.querySelectorAll('.service-bg-icon');
+        if (serviceIcons.length > 0) {
+            serviceIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    y: `${-60 - (index * 20)}px`,
+                    rotation: `${15 + (index * 10)}deg`,
+                    scale: 1.1,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.8 + (index * 0.3)
+                    }
+                });
+            });
+
+            // Background color variation for services page
+            gsap.to('.animated-background', {
+                background: 'linear-gradient(135deg, #f0f4ff 0%, #dbeafe 100%)',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 3
+                }
+            });
+        }
+
+        // Enhanced animations for package icons (Bundles page)
+        const packageIcons = document.querySelectorAll('.package-bg-icon');
+        if (packageIcons.length > 0) {
+            packageIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    y: `${-50 - (index * 25)}px`,
+                    rotation: `${-10 + (index * 5)}deg`,
+                    scale: 0.9 + (index * 0.1),
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 2.2 + (index * 0.4)
+                    }
+                });
+            });
+
+            // Background color variation for bundles page
+            gsap.to('.animated-background', {
+                background: 'linear-gradient(135deg, #f0f4ff 0%, #dbeafe 100%)',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 3
+                }
+            });
+        }
+
+        // Enhanced animations for team icons (Info page)
+        const teamIcons = document.querySelectorAll('.team-bg-icon');
+        if (teamIcons.length > 0) {
+            teamIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    y: `${-70 - (index * 15)}px`,
+                    x: `${10 + (index * 8)}px`,
+                    rotation: `${20 - (index * 8)}deg`,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.5 + (index * 0.5)
+                    }
+                });
+            });
+
+            // Background color variation for info page
+            gsap.to('.animated-background', {
+                background: 'linear-gradient(135deg, #f0f4ff 0%, #dbeafe 100%)',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 3
+                }
+            });
+        }
+
+        // Enhanced animations for contact icons (Kontakt page)
+        const contactIcons = document.querySelectorAll('.contact-bg-icon');
+        if (contactIcons.length > 0) {
+            contactIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    y: `${-45 - (index * 30)}px`,
+                    x: `${-5 + (index * 12)}px`,
+                    rotation: `${-15 + (index * 12)}deg`,
+                    scale: 1.05,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.2 + (index * 0.3)
+                    }
+                });
+            });
+
+            // Background color variation for contact page
+            gsap.to('.animated-background', {
+                background: 'linear-gradient(135deg, #f0f4ff 0%, #dbeafe 100%)',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 3
+                }
+            });
+        }
+
+        // Add floating particles animation for all pages
+        const particles = document.querySelectorAll('.floating-particle');
+        if (particles.length > 0) {
+            particles.forEach((particle, index) => {
+                gsap.to(particle, {
+                    y: `${-40 - (index * 15)}px`,
+                    x: `${Math.sin(index) * 20}px`,
+                    scale: 1.2 + (index * 0.1),
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 0.8 + (index * 0.2)
+                    }
+                });
+            });
+        }
+    }
+
     // Initialize background animations
     initBackgroundAnimations();
+    
+    // Initialize subpage-specific background animations
+    initSubpageBackgrounds();
+    
     gsap.from('.nav-item, .nav-logo', { opacity: 0, y: -10, stagger: 0.1, duration: 0.4, delay: 0.2 });
 
     // --- NEU: Animation für Service- und Bundle-Boxen auf der Startseite ---
