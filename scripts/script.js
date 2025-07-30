@@ -48,6 +48,131 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.from('#mainText h3', { opacity: 0, y: 20, duration: 0.5, delay: 0.9 });
     // Navigation einblenden
     gsap.from('#nav', { opacity: 0, y: -30, duration: 0.5, delay: 0.1 });
+
+    // Animated Background Parallax Effects
+    function initBackgroundAnimations() {
+        const scrollLogo1 = document.getElementById('scrollLogo1');
+        const scrollLogo2 = document.getElementById('scrollLogo2');
+        const scrollCode1 = document.getElementById('scrollCode1');
+        const scrollCode2 = document.getElementById('scrollCode2');
+
+        if (scrollLogo1 && scrollLogo2 && scrollCode1 && scrollCode2) {
+            // Position the scroll elements initially
+            gsap.set(scrollLogo1, { x: '20vw', y: '30vh', rotation: 0 });
+            gsap.set(scrollLogo2, { x: '70vw', y: '70vh', rotation: 45 });
+            gsap.set(scrollCode1, { x: '10vw', y: '60vh', rotation: 0 });
+            gsap.set(scrollCode2, { x: '80vw', y: '20vh', rotation: -15 });
+
+            // Create scroll-triggered animations for logos
+            gsap.to(scrollLogo1, {
+                x: '80vw',
+                y: '10vh',
+                rotation: 180,
+                scale: 1.2,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1
+                }
+            });
+
+            gsap.to(scrollLogo2, {
+                x: '30vw',
+                y: '40vh',
+                rotation: -90,
+                scale: 0.8,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.5
+                }
+            });
+
+            // Create scroll-triggered animations for code blocks
+            gsap.to(scrollCode1, {
+                x: '70vw',
+                y: '80vh',
+                rotation: 15,
+                scale: 1.1,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.8
+                }
+            });
+
+            gsap.to(scrollCode2, {
+                x: '20vw',
+                y: '50vh',
+                rotation: 25,
+                scale: 0.9,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1.2
+                }
+            });
+
+            // Parallax effect for tech shapes
+            const techShapes = document.querySelectorAll('.tech-shape');
+            techShapes.forEach((shape, index) => {
+                gsap.to(shape, {
+                    y: `${-100 - (index * 30)}px`,
+                    rotation: `${360 + (index * 45)}deg`,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 2 + (index * 0.3)
+                    }
+                });
+            });
+
+            // Parallax effect for social icons
+            const socialIcons = document.querySelectorAll('.social-bg-icon');
+            socialIcons.forEach((icon, index) => {
+                gsap.to(icon, {
+                    y: `${-80 - (index * 25)}px`,
+                    x: `${20 + (index * 15)}px`,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.5 + (index * 0.4)
+                    }
+                });
+            });
+
+            // Background gradient animation on scroll
+            gsap.to('.animated-background', {
+                background: 'linear-gradient(135deg, #e8f4fd 0%, #d1e7dd 100%)',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 3
+                }
+            });
+
+            // Grid animation speed change on scroll
+            gsap.to('.digital-grid', {
+                animationDuration: '15s',
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 2
+                }
+            });
+        }
+    }
+
+    // Initialize background animations
+    initBackgroundAnimations();
     gsap.from('.nav-item, .nav-logo', { opacity: 0, y: -10, stagger: 0.1, duration: 0.4, delay: 0.2 });
 
     // --- NEU: Animation für Service- und Bundle-Boxen auf der Startseite ---

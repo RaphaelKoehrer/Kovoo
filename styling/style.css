@@ -41,6 +41,215 @@ body {
     height: auto;
     overflow-x: hidden;
     margin: 0;
+    position: relative;
+}
+
+/* Animated Background */
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8fafc 0%, #e1e8f0 100%);
+}
+
+/* Digital Grid Pattern */
+.digital-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(28, 28, 132, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(28, 28, 132, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 30s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* Floating Code Elements */
+.code-element {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: rgba(28, 28, 132, 0.15);
+    font-weight: bold;
+    animation: codeFloat 25s infinite linear;
+    white-space: nowrap;
+}
+
+.code-element:nth-child(2) {
+    top: 15%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.code-element:nth-child(3) {
+    top: 35%;
+    right: 10%;
+    animation-delay: -8s;
+}
+
+.code-element:nth-child(4) {
+    top: 65%;
+    left: 15%;
+    animation-delay: -15s;
+}
+
+.code-element:nth-child(5) {
+    top: 85%;
+    right: 20%;
+    animation-delay: -22s;
+}
+
+@keyframes codeFloat {
+    0% {
+        transform: translateY(0px);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-20px);
+        opacity: 0.15;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 0.3;
+    }
+}
+
+/* Social Media Icons Background */
+.social-bg-icon {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.08;
+    animation: socialFloat 20s infinite ease-in-out;
+}
+
+.social-bg-icon:nth-child(6) {
+    background-image: url('../images/Icons/facebook_icon.png');
+    top: 25%;
+    left: 80%;
+    animation-delay: 0s;
+}
+
+.social-bg-icon:nth-child(7) {
+    background-image: url('../images/Icons/instagram_icon.png');
+    top: 55%;
+    left: 10%;
+    animation-delay: -7s;
+}
+
+.social-bg-icon:nth-child(8) {
+    background-image: url('../images/Icons/tiktok_icon.png');
+    top: 75%;
+    right: 15%;
+    animation-delay: -14s;
+}
+
+@keyframes socialFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+    }
+}
+
+/* Geometric Tech Shapes */
+.tech-shape {
+    position: absolute;
+    border: 2px solid rgba(28, 28, 132, 0.1);
+    background: rgba(201, 216, 255, 0.05);
+    animation: techRotate 40s infinite linear;
+}
+
+.tech-shape:nth-child(9) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 30%;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    animation-delay: 0s;
+}
+
+.tech-shape:nth-child(10) {
+    width: 100px;
+    height: 100px;
+    top: 40%;
+    right: 25%;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    animation-delay: -10s;
+}
+
+.tech-shape:nth-child(11) {
+    width: 60px;
+    height: 60px;
+    top: 70%;
+    left: 40%;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-delay: -20s;
+}
+
+@keyframes techRotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+        opacity: 0.1;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.3;
+    }
+}
+
+/* Scroll-based elements for parallax effect */
+.scroll-element {
+    position: absolute;
+    will-change: transform;
+}
+
+.scroll-logo {
+    width: 120px;
+    height: 120px;
+    background-image: url('../images/IconSmallWhite.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.06;
+    filter: blur(1px);
+}
+
+.scroll-code-block {
+    width: 200px;
+    height: 120px;
+    background: rgba(28, 28, 132, 0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(28, 28, 132, 0.08);
+    position: relative;
+}
+
+.scroll-code-block::before {
+    content: "{ display: flex; }";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: rgba(28, 28, 132, 0.3);
 }
 
 /* Removed page transition classes that conflict with GSAP */
@@ -51,6 +260,9 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    z-index: 1;
+    background: transparent;
 }
 
 #header {
@@ -66,7 +278,7 @@ body {
     top: 0;
     margin-top: 0;
     padding-top: 0;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px) saturate(200%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-bottom: 1px solid rgba(193, 193, 193, 0.136);
