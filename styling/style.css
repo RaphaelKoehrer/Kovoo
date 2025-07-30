@@ -69,8 +69,8 @@ body {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(20px) saturate(200%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(193, 193, 193, 0.136);
+    box-shadow: 0 16px 64px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 #header hr {
@@ -121,9 +121,11 @@ body {
     margin-left: 0;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: fixed;
-    top: 50px;
+    top: 40px;
     left: 120px;
     border-radius: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -153,7 +155,6 @@ body {
 
 .nav-hamburger.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
-    background: #dc3545;
 }
 .nav-hamburger.active span:nth-child(2) {
     opacity: 0;
@@ -161,7 +162,6 @@ body {
 }
 .nav-hamburger.active span:nth-child(3) {
     transform: translateY(-9px) rotate(-45deg);
-    background: #dc3545;
 }
 
 .nav-logo {
@@ -188,7 +188,8 @@ body {
 
 
 #welcomeText {
-    margin-top: 20rem;
+    margin-top: calc(120px + 8rem);
+    padding-top: 2rem;
 }
 
 #welcomeText h1 {
@@ -547,10 +548,11 @@ body {
     width: 140px;
     height: 140px;
     background: linear-gradient(135deg, var(--color-bg-gradient-end) 0%, var(--color-navy) 100%);
-    opacity: 0.08;
+    opacity: 0.15;
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
+    animation: pulse-bg 6s ease-in-out infinite;
 }
 
 .service-box * {
@@ -616,10 +618,11 @@ body {
     width: 120px;
     height: 120px;
     background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-bg-gradient-end) 100%);
-    opacity: 0.07;
+    opacity: 0.12;
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
+    animation: float-bg 8s ease-in-out infinite;
 }
 
 .bundle-box * {
@@ -714,10 +717,11 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.25), transparent);
     transform: translateX(-100%);
     transition: transform 0.8s ease;
     pointer-events: none;
+    animation: shimmer 3s ease-in-out infinite;
 }
 
 .nav-dropdown.open {
@@ -761,7 +765,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(28, 28, 132, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(28, 28, 132, 0.2), transparent);
     transition: left 0.5s ease;
 }
 
@@ -1229,10 +1233,11 @@ body {
     width: 80px;
     height: 80px;
     background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-bg-gradient-end) 100%);
-    opacity: 0.05;
+    opacity: 0.12;
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
+    animation: rotate-pulse 10s linear infinite;
 }
 
 /* Footer / Impressum Styling */
@@ -1441,14 +1446,19 @@ body {
         aspect-ratio: 18 / 10;
     }
     
+    #welcomeText {
+        margin-top: calc(120px + 6rem);
+        padding-top: 1.5rem;
+    }
+    
     #servicesAltWrapper {
-        padding: 3rem 0;
+        padding: 2rem 0;
     }
     
     .service-row, .service-row.reverse {
         flex-direction: column !important;
-        min-height: 60vh;
-        padding: 50px 0;
+        min-height: 45vh;
+        padding: 35px 0;
     }
     .service-text, .service-img {
         width: 100%;
@@ -1542,6 +1552,7 @@ body {
     }
     .slider-track {
         gap: 0.7rem;
+        padding: 5px 2rem 25px 2rem;
     }
     
     .slider-icon img {
@@ -1561,7 +1572,8 @@ body {
     }
 
     #welcomeText {
-      margin-top: 35%;
+      margin-top: calc(120px + 4rem);
+      padding-top: 1rem;
     }
 
     .nav-hamburger {
@@ -1569,13 +1581,22 @@ body {
     }
     
     #servicesAltWrapper {
-        padding: 2rem 0;
+        padding: 1rem 0;
     }
     
     .service-row, .service-row.reverse {
         margin: auto;
-        min-height: 70vw;
-        padding: 40px 0;
+        min-height: 50vw;
+        padding: 25px 0;
+    }
+
+    .horizontal-slider {
+        margin-top: 6%;
+        padding: 1rem 0;
+    }
+    
+    .contact-cta-section {
+        margin: 1.5rem 0;
     }
 
     
@@ -1636,6 +1657,27 @@ body {
     }
 }
 
+@media (max-width: 480px) {
+    #welcomeText {
+        margin-top: calc(120px + 2rem);
+        padding-top: 0.5rem;
+    }
+    
+    .service-row, .service-row.reverse {
+        min-height: 40vw;
+        padding: 20px 0;
+    }
+    
+    .horizontal-slider {
+        margin-top: 4%;
+        padding: 0.8rem 0;
+    }
+    
+    #servicesAltWrapper {
+        padding: 0.8rem 0;
+    }
+}
+
 /* Redesigned pricing info section with animations that match site aesthetic */
 .pricing-info {
     background: linear-gradient(135deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 100%);
@@ -1660,11 +1702,11 @@ body {
     width: 180px;
     height: 180px;
     background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-bg-gradient-end) 100%);
-    opacity: 0.08;
+    opacity: 0.15;
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;
-    animation: rotate 20s infinite linear;
+    animation: rotate 15s infinite linear;
 }
 
 /* Small currency icons for visual interest */
@@ -1737,6 +1779,82 @@ body {
 @keyframes rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* New enhanced background animations */
+@keyframes pulse-bg {
+    0%, 100% { 
+        opacity: 0.15; 
+        transform: scale(1); 
+    }
+    50% { 
+        opacity: 0.25; 
+        transform: scale(1.1); 
+    }
+}
+
+@keyframes float-bg {
+    0%, 100% { 
+        opacity: 0.12; 
+        transform: translateY(0) scale(1); 
+    }
+    33% { 
+        opacity: 0.18; 
+        transform: translateY(-10px) scale(1.05); 
+    }
+    66% { 
+        opacity: 0.22; 
+        transform: translateY(5px) scale(0.95); 
+    }
+}
+
+@keyframes shimmer {
+    0%, 100% { 
+        opacity: 0.25; 
+        transform: translateX(-100%) scaleX(1); 
+    }
+    50% { 
+        opacity: 0.4; 
+        transform: translateX(-50%) scaleX(1.2); 
+    }
+}
+
+@keyframes slide-glow {
+    0%, 100% { 
+        left: -100%; 
+        opacity: 0.2; 
+    }
+    25% { 
+        left: -50%; 
+        opacity: 0.3; 
+    }
+    75% { 
+        left: 50%; 
+        opacity: 0.25; 
+    }
+}
+
+@keyframes rotate-pulse {
+    0% { 
+        transform: rotate(0deg) scale(1); 
+        opacity: 0.12; 
+    }
+    25% { 
+        transform: rotate(90deg) scale(1.1); 
+        opacity: 0.18; 
+    }
+    50% { 
+        transform: rotate(180deg) scale(0.9); 
+        opacity: 0.22; 
+    }
+    75% { 
+        transform: rotate(270deg) scale(1.05); 
+        opacity: 0.15; 
+    }
+    100% { 
+        transform: rotate(360deg) scale(1); 
+        opacity: 0.12; 
+    }
 }
 
 /* Add subtle pulse animation when visible on screen */
