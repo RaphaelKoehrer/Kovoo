@@ -474,12 +474,23 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    // --- INFINITE HORIZONTAL SLIDER IMPLEMENTATION ---
+    // --- TRUE SEAMLESS INFINITE HORIZONTAL SLIDER ---
     function setupInfiniteSlider() {
+        const sliderContainer = document.querySelector('.horizontal-slider');
         const sliderTrack = document.querySelector('.slider-track');
         const sliderBoxes = document.querySelectorAll('.slider-box');
         
-        if (!sliderTrack || sliderBoxes.length === 0) return;
+        if (!sliderContainer || !sliderTrack || sliderBoxes.length === 0) return;
+        
+        // Variables for scroll control
+        let autoScrollTween = null;
+        let isUserScrolling = false;
+        let scrollTimeout = null;
+        let currentX = 0;
+        let userScrollStartX = 0;
+        let isDragging = false;
+        let startMouseX = 0;
+        let startTouchX = 0;
         
         // First animate in the original boxes with staggered effect
         gsap.from(sliderBoxes, {
@@ -489,68 +500,255 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.1,
             delay: 0.3,
             ease: 'power2.out',
-            onComplete: initInfiniteScroll // Start infinite scroll after initial animation
+            onComplete: initInfiniteScroll
         });
         
         function initInfiniteScroll() {
-            // Clone slider boxes and append them to create the infinite effect
+            // Clone slider boxes many times for true seamless scrolling
             const boxesToClone = Array.from(sliderBoxes);
-            boxesToClone.forEach(box => {
-                const clone = box.cloneNode(true);
-                sliderTrack.appendChild(clone);
-            });
             
-            // Calculate the width of one complete set of boxes
+            // Clone 10 times for super smooth infinite effect
+            for (let i = 0; i < 10; i++) {
+                boxesToClone.forEach(box => {
+                    const clone = box.cloneNode(true);
+                    sliderTrack.appendChild(clone);
+                });
+            }
+            
+            // Calculate dimensions
             const boxWidth = sliderBoxes[0].offsetWidth;
             const gap = parseFloat(getComputedStyle(sliderTrack).columnGap || '1.5rem');
-            const totalWidth = sliderBoxes.length * (boxWidth + gap);
+            const singleSetWidth = sliderBoxes.length * (boxWidth + gap);
             
-            // Create the infinite scrolling animation
-            const scrollTween = gsap.timeline({repeat: -1, paused: false});
+            // Set initial position
+            currentX = 0;
+            gsap.set(sliderTrack, { x: currentX });
             
-            // Animate to the end of the original boxes
-            scrollTween.to(sliderTrack, {
-                x: -totalWidth, // Move exactly one set width
-                duration: 30, // Duration in seconds - adjust for speed
-                ease: "linear",
-                onComplete: () => {
-                    // Reset position to start for seamless loop
-                    gsap.set(sliderTrack, { x: 0 });
+            // Create seamless infinite auto-scroll
+            function createAutoScroll() {
+                if (autoScrollTween) {
+                    autoScrollTween.kill();
+                }
+                
+                autoScrollTween = gsap.to(sliderTrack, {
+                    x: `-=${singleSetWidth}`,
+                    duration: singleSetWidth / 60, // 60px per second
+                    ease: "none",
+                    repeat: -1,
+                    onUpdate: () => {
+                        if (!isUserScrolling) {
+                            currentX = gsap.getProperty(sliderTrack, "x");
+                        }
+                    }
+                });
+            }
+            
+            // Handle mouse/touch interactions
+            function startUserInteraction(clientX) {
+                isUserScrolling = true;
+                isDragging = true;
+                userScrollStartX = clientX;
+                
+                if (autoScrollTween) {
+                    autoScrollTween.pause();
+                }
+                
+                clearTimeout(scrollTimeout);
+            }
+            
+            function updateUserInteraction(clientX) {
+                if (!isDragging) return;
+                
+                const deltaX = clientX - userScrollStartX;
+                const newX = currentX + deltaX;
+                gsap.set(sliderTrack, { x: newX });
+                
+                // Handle seamless looping during user interaction
+                handleSeamlessLoop(newX);
+            }
+            
+            function endUserInteraction() {
+                isDragging = false;
+                currentX = gsap.getProperty(sliderTrack, "x");
+                
+                // Resume auto-scroll after 1 second
+                scrollTimeout = setTimeout(() => {
+                    isUserScrolling = false;
+                    createAutoScroll();
+                }, 1000);
+            }
+            
+            // Handle seamless infinite loop
+            function handleSeamlessLoop(x) {
+                const currentPos = x || gsap.getProperty(sliderTrack, "x");
+                
+                // If we've scrolled past one complete set, reset seamlessly
+                if (currentPos <= -singleSetWidth) {
+                    const newPos = currentPos + singleSetWidth;
+                    gsap.set(sliderTrack, { x: newPos });
+                    currentX = newPos;
+                    
+                    // Update tween position if auto-scrolling
+                    if (autoScrollTween && !isUserScrolling) {
+                        autoScrollTween.vars.x = newPos;
+                    }
+                }
+                // If scrolled backwards past start, loop to end
+                else if (currentPos > 0) {
+                    const newPos = currentPos - singleSetWidth;
+                    gsap.set(sliderTrack, { x: newPos });
+                    currentX = newPos;
+                    
+                    if (autoScrollTween && !isUserScrolling) {
+                        autoScrollTween.vars.x = newPos;
+                    }
+                }
+            }
+            
+            // Mouse events - improved for laptops
+            sliderContainer.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                startUserInteraction(e.clientX);
+                startMouseX = e.clientX;
+                sliderContainer.style.cursor = 'grabbing';
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    updateUserInteraction(e.clientX - startMouseX + userScrollStartX);
                 }
             });
             
-            // Set initial timeScale
-            scrollTween.timeScale(1);
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    endUserInteraction();
+                    sliderContainer.style.cursor = 'grab';
+                }
+            });
             
-            // Track if any box is currently being hovered
-            let boxHoverCount = 0;
+            // Touch events
+            sliderContainer.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                startUserInteraction(touch.clientX);
+                startTouchX = touch.clientX;
+            }, { passive: false });
             
-            // Add event listeners to all slider boxes (original and cloned)
+            sliderContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (isDragging) {
+                    const touch = e.touches[0];
+                    updateUserInteraction(touch.clientX - startTouchX + userScrollStartX);
+                }
+            }, { passive: false });
+            
+            sliderContainer.addEventListener('touchend', () => {
+                if (isDragging) {
+                    endUserInteraction();
+                }
+            });
+            
+            // Enhanced wheel scrolling - better for trackpads and mice
+            sliderContainer.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                
+                if (!isUserScrolling) {
+                    isUserScrolling = true;
+                    if (autoScrollTween) {
+                        autoScrollTween.pause();
+                    }
+                }
+                
+                // Better scrolling sensitivity for different input devices
+                let scrollAmount = 0;
+                
+                // Detect if it's likely a trackpad (smaller deltaY values, often decimal)
+                if (Math.abs(e.deltaY) < 50 && e.deltaY % 1 !== 0) {
+                    // Trackpad - use smaller multiplier
+                    scrollAmount = e.deltaY * 3;
+                } else {
+                    // Mouse wheel - use larger multiplier
+                    scrollAmount = e.deltaY * 1.5;
+                }
+                
+                // Handle horizontal scroll on trackpads
+                if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                    scrollAmount = e.deltaX * 2;
+                }
+                
+                currentX -= scrollAmount;
+                gsap.set(sliderTrack, { x: currentX });
+                handleSeamlessLoop();
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isUserScrolling = false;
+                    createAutoScroll();
+                }, 1000);
+            }, { passive: false });
+            
+            // Keyboard navigation for accessibility
+            sliderContainer.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    
+                    if (!isUserScrolling) {
+                        isUserScrolling = true;
+                        if (autoScrollTween) {
+                            autoScrollTween.pause();
+                        }
+                    }
+                    
+                    const scrollAmount = e.key === 'ArrowLeft' ? 100 : -100;
+                    currentX += scrollAmount;
+                    gsap.to(sliderTrack, { x: currentX, duration: 0.3, ease: "power2.out" });
+                    handleSeamlessLoop();
+                    
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isUserScrolling = false;
+                        createAutoScroll();
+                    }, 1000);
+                }
+            });
+            
+            // Make container focusable for keyboard navigation
+            sliderContainer.setAttribute('tabindex', '0');
+            
+            // Hover effects (visual only)
             const allSliderBoxes = document.querySelectorAll('.slider-box');
             allSliderBoxes.forEach(box => {
                 box.addEventListener('mouseenter', () => {
-                    boxHoverCount++;
-                    // Slow down animation when hovering over any box
-                    gsap.to(scrollTween, {
-                        timeScale: 0.1, // Slow to 10% speed
-                        duration: 0.8,
+                    gsap.to(box, {
+                        scale: 1.02,
+                        duration: 0.3,
                         ease: "power2.out"
                     });
                 });
                 
                 box.addEventListener('mouseleave', () => {
-                    boxHoverCount--;
-                    // Only speed up if no boxes are being hovered
-                    if (boxHoverCount <= 0) {
-                        boxHoverCount = 0; // Ensure counter never goes negative
-                        gsap.to(scrollTween, {
-                            timeScale: 1, // Back to normal speed
-                            duration: 0.4,
-                            ease: "power2.in"
-                        });
-                    }
+                    gsap.to(box, {
+                        scale: 1,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
                 });
             });
+            
+            // Continuous seamless loop monitoring
+            function monitorSeamlessLoop() {
+                if (!isUserScrolling) {
+                    handleSeamlessLoop();
+                }
+                requestAnimationFrame(monitorSeamlessLoop);
+            }
+            
+            // Start everything
+            setTimeout(() => {
+                createAutoScroll();
+                monitorSeamlessLoop();
+            }, 500);
         }
     }
     
