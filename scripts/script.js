@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Dynamic Background Animations
+    initDynamicBackground();
+
     // WelcomeText Animation: Container einblenden
     gsap.fromTo('#welcomeText', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
     // Einzelne Elemente nacheinander einblenden
@@ -1107,6 +1110,154 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
         }
+    }
+
+    // Dynamic Background Animation Function
+    function initDynamicBackground() {
+        // Only proceed if we have the necessary elements
+        const bgShapes = document.querySelectorAll('.bg-shape');
+        const particles = document.querySelectorAll('.particle');
+        
+        if (bgShapes.length === 0 && particles.length === 0) {
+            return;
+        }
+
+        // Background gradient animation on scroll
+        gsap.to('.animated-background', {
+            background: 'linear-gradient(135deg, #e8f1f8 0%, #d1e4f0 20%, #c4ddf2 40%, #b2d3ef 60%, #9fc7eb 80%, #8cb8e8 100%)',
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 2
+            }
+        });
+
+        // Animate geometric shapes based on scroll
+        bgShapes.forEach((shape, index) => {
+            const speed = parseFloat(shape.dataset.speed) || 0.5;
+            const direction = index % 2 === 0 ? 1 : -1;
+            
+            // Different animation patterns for different shapes
+            if (shape.classList.contains('circle')) {
+                gsap.to(shape, {
+                    y: `${-150 * speed * direction}px`,
+                    x: `${50 * speed * direction}px`,
+                    rotation: `${180 * direction}deg`,
+                    scale: 1.1 + (speed * 0.3),
+                    opacity: 0.15,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1 + speed
+                    }
+                });
+            } else if (shape.classList.contains('triangle')) {
+                gsap.to(shape, {
+                    y: `${-100 * speed * direction}px`,
+                    x: `${30 * speed}px`,
+                    rotation: `${120 * direction}deg`,
+                    scale: 1 + (speed * 0.2),
+                    opacity: 0.12,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 0.8 + speed
+                    }
+                });
+            } else if (shape.classList.contains('square')) {
+                gsap.to(shape, {
+                    y: `${-80 * speed}px`,
+                    x: `${40 * speed * direction}px`,
+                    rotation: `${90 + (45 * direction)}deg`,
+                    scale: 0.9 + (speed * 0.4),
+                    opacity: 0.1,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.2 + speed
+                    }
+                });
+            } else if (shape.classList.contains('hexagon')) {
+                gsap.to(shape, {
+                    y: `${-120 * speed}px`,
+                    x: `${25 * speed * direction}px`,
+                    rotation: `${60 * direction}deg`,
+                    scale: 1.05 + (speed * 0.25),
+                    opacity: 0.13,
+                    scrollTrigger: {
+                        trigger: 'body',
+                        start: 'top top',
+                        end: 'bottom bottom',
+                        scrub: 1.5 + speed
+                    }
+                });
+            }
+        });
+
+        // Animate particles
+        particles.forEach((particle, index) => {
+            const speed = parseFloat(particle.dataset.speed) || 0.5;
+            const direction = index % 3 === 0 ? 1 : index % 3 === 1 ? -1 : 0;
+            
+            gsap.to(particle, {
+                y: `${-200 * speed}px`,
+                x: `${30 * speed * direction}px`,
+                opacity: 0.9,
+                scale: 1.5 + speed,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 0.5 + speed
+                }
+            });
+        });
+
+        // Add floating animation to shapes when not scrolling
+        bgShapes.forEach((shape, index) => {
+            gsap.to(shape, {
+                y: '+=20',
+                rotation: '+=5',
+                duration: 3 + (index * 0.5),
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1
+            });
+        });
+
+        // Add gentle floating to particles
+        particles.forEach((particle, index) => {
+            gsap.to(particle, {
+                y: '+=15',
+                x: '+=10',
+                duration: 2 + (index * 0.3),
+                ease: 'sine.inOut',
+                yoyo: true,
+                repeat: -1
+            });
+        });
+
+        // Responsive adjustments
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        
+        function handleResponsive(e) {
+            if (e.matches) {
+                // Mobile: reduce animation intensity
+                gsap.set('.bg-shape', { scale: 0.7, opacity: 0.05 });
+                gsap.set('.particle', { scale: 0.8, opacity: 0.5 });
+            } else {
+                // Desktop: full animation intensity
+                gsap.set('.bg-shape', { scale: 1, opacity: 0.08 });
+                gsap.set('.particle', { scale: 1, opacity: 0.7 });
+            }
+        }
+        
+        mediaQuery.addListener(handleResponsive);
+        handleResponsive(mediaQuery);
     }
 
     // Load footer dynamically

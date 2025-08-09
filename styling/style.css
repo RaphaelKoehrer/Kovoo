@@ -44,7 +44,7 @@ body {
     position: relative;
 }
 
-/* Static Background */
+/* Dynamic Scroll Background */
 .animated-background {
     position: fixed;
     top: 0;
@@ -53,7 +53,213 @@ body {
     height: 100%;
     z-index: -1;
     overflow: hidden;
-    background: linear-gradient(to bottom, #f8fafc 0%, #e0e7ef 100%);
+    background: linear-gradient(135deg, 
+        #f8fafc 0%, 
+        #e8f1f8 20%, 
+        #d6e8f5 40%, 
+        #c4ddf2 60%, 
+        #b2d3ef 80%, 
+        #a0c8ec 100%);
+}
+
+/* Geometric Background Shapes */
+.bg-geometric-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.bg-shape {
+    position: absolute;
+    opacity: 0.08;
+    transition: all 0.3s ease;
+}
+
+/* Circle Shapes */
+.bg-shape.circle {
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1c1c84, #2d2db8);
+    box-shadow: 0 0 30px rgba(28, 28, 132, 0.3);
+}
+
+.bg-shape.circle.large {
+    width: 200px;
+    height: 200px;
+    top: 15%;
+    left: 70%;
+}
+
+.bg-shape.circle.medium {
+    width: 120px;
+    height: 120px;
+}
+
+.bg-shape.circle.small {
+    width: 60px;
+    height: 60px;
+}
+
+/* Triangle Shapes */
+.bg-shape.triangle {
+    width: 0;
+    height: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.bg-shape.triangle.large {
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 140px solid rgba(28, 28, 132, 0.1);
+    top: 40%;
+    left: 10%;
+}
+
+.bg-shape.triangle.medium {
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 87px solid rgba(45, 45, 184, 0.08);
+    top: 70%;
+    right: 15%;
+}
+
+.bg-shape.triangle.small {
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 43px solid rgba(28, 28, 132, 0.06);
+    top: 25%;
+    left: 40%;
+}
+
+/* Square Shapes */
+.bg-shape.square {
+    background: linear-gradient(45deg, rgba(28, 28, 132, 0.1), rgba(45, 45, 184, 0.05));
+    transform: rotate(15deg);
+    box-shadow: 0 0 25px rgba(28, 28, 132, 0.2);
+}
+
+.bg-shape.square.medium {
+    width: 100px;
+    height: 100px;
+    top: 60%;
+    left: 75%;
+}
+
+.bg-shape.square.small {
+    width: 50px;
+    height: 50px;
+    top: 30%;
+    right: 25%;
+}
+
+/* Hexagon Shapes */
+.bg-shape.hexagon {
+    background: rgba(28, 28, 132, 0.08);
+    position: relative;
+}
+
+.bg-shape.hexagon.large {
+    width: 120px;
+    height: 69px;
+    top: 80%;
+    left: 20%;
+}
+
+.bg-shape.hexagon.small {
+    width: 60px;
+    height: 35px;
+    top: 45%;
+    right: 30%;
+}
+
+.bg-shape.hexagon:before,
+.bg-shape.hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+}
+
+.bg-shape.hexagon.large:before,
+.bg-shape.hexagon.large:after {
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+}
+
+.bg-shape.hexagon.small:before,
+.bg-shape.hexagon.small:after {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+}
+
+.bg-shape.hexagon:before {
+    bottom: 100%;
+    border-bottom: 35px solid rgba(28, 28, 132, 0.08);
+}
+
+.bg-shape.hexagon:after {
+    top: 100%;
+    border-top: 35px solid rgba(28, 28, 132, 0.08);
+}
+
+.bg-shape.hexagon.small:before {
+    border-bottom: 17px solid rgba(28, 28, 132, 0.08);
+}
+
+.bg-shape.hexagon.small:after {
+    border-top: 17px solid rgba(28, 28, 132, 0.08);
+}
+
+/* Floating Particles */
+.bg-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(28, 28, 132, 0.6), rgba(28, 28, 132, 0.1));
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.particle:nth-child(1) { top: 20%; left: 15%; }
+.particle:nth-child(2) { top: 35%; left: 80%; }
+.particle:nth-child(3) { top: 50%; left: 25%; }
+.particle:nth-child(4) { top: 65%; left: 70%; }
+.particle:nth-child(5) { top: 80%; left: 40%; }
+.particle:nth-child(6) { top: 15%; left: 55%; }
+.particle:nth-child(7) { top: 45%; left: 85%; }
+.particle:nth-child(8) { top: 75%; left: 10%; }
+
+/* Responsive Adjustments for Background */
+@media (max-width: 768px) {
+    .bg-shape.large {
+        transform: scale(0.7);
+    }
+    
+    .bg-shape.medium {
+        transform: scale(0.8);
+    }
+    
+    .bg-shape.small {
+        transform: scale(0.9);
+    }
+    
+    .particle {
+        width: 3px;
+        height: 3px;
+    }
 }
 
 /* === END UNTERSEITEN VARIATIONS === */
