@@ -425,10 +425,15 @@ body {
     text-align: center;
 }
 
-#welcomeText img {
-    top: 33px;
-    position: relative;
-    width: 250px;
+
+/* Logo im Willkommen-Text als Inline-Element */
+.logo-inline {
+    display: inline-block;
+    height: 2.0em;
+    width: auto;
+    aspect-ratio: 2/1;
+    vertical-align: middle;
+    margin-bottom: 0.25em;
 }
 
 #mainText hr {
@@ -1332,22 +1337,34 @@ body {
 }
 
 .horizontal-slider {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+.horizontal-slider::-webkit-scrollbar {
+    display: none;
+}
     margin-top: 10%;
     width: 100%;
-    overflow: hidden; /* Hide overflow for seamless infinite scroll */
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 2rem 0;
     z-index: 2;
     position: relative;
-    cursor: grab; /* Show that it's draggable */
+    cursor: auto;
 }
 
-.horizontal-slider:active {
-    cursor: grabbing;
-}
 
-/* Remove scrollbar completely since we use transform */
+
+/* Zeige die horizontale Scrollbar */
 .horizontal-slider::-webkit-scrollbar {
-    display: none;
+    height: 10px;
+}
+.horizontal-slider::-webkit-scrollbar-thumb {
+    background: #d1e4f0;
+    border-radius: 6px;
+}
+.horizontal-slider::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 6px;
 }
 
 .slider-track {
@@ -1365,7 +1382,7 @@ body {
     background-color: var(--color-bg-light, #fff);
     border-radius: 18px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 2rem 1.5rem 1.8rem 1.5rem;
+    padding: 1.5rem 1rem 1rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1374,7 +1391,6 @@ body {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    left: 2%;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
                 background-color 0.3s ease,
                 box-shadow 0.4s ease,
@@ -1382,8 +1398,6 @@ body {
 }
 
 .slider-box:hover {
-    background-color: var(--color-box-hover);
-    border-color: var(--color-navy);
     box-shadow: 0 10px 20px rgba(0,0,0,0.15),
                 0 12px 10px rgba(28,28,132,0.12),
                 0 5px 10px rgba(0,0,0,0.08);
