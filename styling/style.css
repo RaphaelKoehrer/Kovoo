@@ -431,11 +431,18 @@ body {
     display: inline-block;
     height: 2.0em;
     width: auto;
-    aspect-ratio: 2/1;
+    aspect-ratio: 2.2/1;
     vertical-align: middle;
     margin-bottom: 0.25em;
 }
 
+
+@media (max-width: 600px) {
+    .logo-inline {
+        height: 3.0em;
+        margin-left: 0.18em;
+    }
+}
 #mainText hr {
     width: 22%;
 }
